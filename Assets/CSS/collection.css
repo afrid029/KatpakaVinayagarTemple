@@ -1,0 +1,56 @@
+.collect {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  aspect-ratio: 1;
+  height: auto;
+  cursor: pointer;
+  margin-bottom: 2%;
+}
+
+.images {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.rightSide {
+  position: absolute;
+  transform: rotate(-20deg);
+  background-image: url("/Assets/Images/vin.jpg");
+  width: 70%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.2s ease;
+}
+
+.leftSide {
+  position: absolute;
+  transform: rotate(20deg);
+  left: 25px;
+  background-image: url("/Assets/Images/vin2.jpg");
+  width: 70%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.2s ease;
+}
+
+.collect:hover .rightSide {
+  transform: rotate(0deg);
+  transition: all 0.2s ease;
+}
+
+.collect:hover .leftSide {
+  transform: rotate(0deg);
+  left: 50px;
+  transition: all 0.2s ease;
+}
