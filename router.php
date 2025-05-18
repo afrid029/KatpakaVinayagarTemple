@@ -26,7 +26,7 @@ switch ($request) {
         require 'Controllers/logoff.php';
     break;
     case '/dashboard':
-        require 'Pages/Dashboard.php';
+        require 'dashboard.php';
         break;
     default:
         http_response_code(404); // Not Found

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/Assets/CSS/alert.css">
     <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
     <link rel="stylesheet" href="/Assets/CSS/model.css">
+    <link rel="stylesheet" href="/Assets/CSS/login.css">
 
 </head>
 
@@ -54,7 +55,15 @@
                 <li class="active">Home</li>
                 <li>Calendar</li>
                 <li>Notice</li>
+                <li>Gallery</li>
                 <li>About</li>
+                <li class="login" onclick="openLogin()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#FFFFFF">
+                        <path
+                            d="M280-400q-33 0-56.5-23.5T200-480q0-33 23.5-56.5T280-560q33 0 56.5 23.5T360-480q0 33-23.5 56.5T280-400Zm0 160q-100 0-170-70T40-480q0-100 70-170t170-70q67 0 121.5 33t86.5 87h352l120 120-180 180-80-60-80 60-85-60h-47q-32 54-86.5 87T280-240Zm0-80q56 0 98.5-34t56.5-86h125l58 41 82-61 71 55 75-75-40-40H435q-14-52-56.5-86T280-640q-66 0-113 47t-47 113q0 66 47 113t113 47Z" />
+                    </svg>
+                    Login</li>
             </ul>
 
             <div class="openMenu">
@@ -80,28 +89,35 @@
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                    </svg>
+                </svg>
                 Home</div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                    </svg>
+                </svg>
                 Calendar</div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                    </svg>
+                </svg>
                 Notice</div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                    </svg>
+                </svg>
+                Gallery</div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
+                    fill="#F19E39">
+                    <path
+                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
+                </svg>
                 About</div>
         </div>
 
@@ -120,7 +136,7 @@
         <div class="body">
             <div class="bodybg"></div>
             <div class="livePlayer">
-                <?php include('Components/Live;Tv.php') ?>
+                <?php include('Components/LiveTv.php') ?>
             </div>
             <!-- <div class="poster">
             <div class="btn backbtn">
@@ -143,7 +159,7 @@
     <!-- Show Events -->
     <div class="events">
         <div class="events-title">
-            <h3>நிகழ்வுகள்</h3>
+            <h3>Upcoming</h3>
             <hr>
         </div>
         <div class="events-container">
@@ -161,6 +177,9 @@
 
             </div>
             <div class="events-right">
+                <div class="events-img">
+
+                </div>
                 <div class="img-cover"></div>
                 <!-- <img src="/Assets/Images/vin.jpg" alt=""> -->
             </div>
@@ -171,46 +190,89 @@
 
     <div class="gallery">
 
-    <div class="gallery-bg"></div>
+        <div class="gallery-bg"></div>
         <div class="gallery-title">
-            <h3>Gallery</h3>
+            <div class="gallery-head">
+                <h3>Gallery</h3>
+                <h5>All gallery >></h5>
+            </div>
             <hr>
         </div>
+
         <div class="gallery-content">
             <?php include("Components/collection.php") ?>
             <?php include("Components/collection.php") ?>
             <?php include("Components/collection.php") ?>
             <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
-           
+
         </div>
     </div>
 
-    <div id="image-viewer" class="model-overlay">
+    <!-- AboutUs -->
+    <div class="about">
+        <div class="about-title">
+            <h3>About Us</h3>
+            <hr>
+        </div>
+        <div class="about-content">
+            <h4>
+                The Sri Katpaga Vinayagar Temple is located in Brampton (Mississauga), Ontario, Canada. Sri Katpaga
+                Vinayagar is the main deity. The other deities in the temple include Sri Konanathar, Sri Mathumaiyamman,
+                Sri Aancha Neyar Swami, Sri Nagapooshani Ambal, Sri Devi, Sri Mahavishnu(Vishnu), Sri Poomi Devi, Hari
+                Hara Buthra Iyanar, Tadsanamoorthy, Sri Raja Rajeswary, Sri Valli, Sri Subramaniyar (Muruan), Sri
+                Theivanai, Durkka, Nadarajar (Load Siva), Sri Aiyappa Swami, Navagrahas { 9 Planets – Sun(Surya),
+                Moon(Chandra), Mars(Mangala), Mercury(Budha), Jupiter(Brihaspathi), Venus(Sukra), Saturn(Sani), Rahu and
+                Ketu } and the Sri Kaala Vairavar.
+            </h4>
+        </div>
+    </div>
+
+     <div class="footer bg-red-900">
+        <div>
+            <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
+                Productions</a>
+        </div>
+
+    </div>
+
+    <!-- Login Model -->
+    <div id="login-model" class="model-overlay">
         <div class="model-body">
-            <div onclick="closeImageViewer()" class="close-btn">x</div>
+            <div onclick="closeLoginViewer()" class="close-btn">x</div>
             <div class="model-content">
-                <div class="image-viewer-container">
-                    <div class="image-viewer">
-                        <img id="frontImg" src="" alt="Front Page">
+                <div class="login-form">
+                    <div class="login-title">
+                        <h4>Login</h4>
+                        <hr>
+                    </div>
+                    <div class="login-content">
+                        <form action="/login" method="post" oninput="validateForm()"
+                            onsubmit="return submitLoginform()">
+                            <div class="Form">
+                                <div class="FormRow">
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" name="email" id="email" required />
+                                </div>
+                                <div class="FormRow">
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password" name="password" id="password" required />
+                                </div>
+
+                                <button type="submit" id="submit" name="submit" disabled="true" class="upload"> Login
+                                </button>
+
+                                <button style="display: none;" id="submiting" disabled="true" class="upload"> logging
+                                    in...
+                                </button>
+                        </form>
                     </div>
                 </div>
-
             </div>
 
         </div>
     </div>
 
-    <div class="footer bg-red-900">
-        <div>
-            <span class="text-gray-200">Designed By : </span> Mass Production
-        </div>
-
-    </div>
+   
 
 </body>
 
@@ -254,12 +316,12 @@
     //         }, 1000);
     //     }
     // }
-    //  function seeNotice() {
-    //     document.getElementById('frontImg').src = posters[currentIndex];
-    //     document.getElementById('image-viewer').style.display = 'block';
-    // }
-    function closeImageViewer() {
-        document.getElementById('image-viewer').style.display = 'none';
+     function openLogin() {
+        // document.getElementById('frontImg').src = posters[currentIndex];
+        document.getElementById('login-model').style.display = 'block';
+    }
+    function closeLoginViewer() {
+        document.getElementById('login-model').style.display = 'none';
         document.getElementById('frontImg').src = '';
     }
     const openMenue = document.querySelector('.openMenu');

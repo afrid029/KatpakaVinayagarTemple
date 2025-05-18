@@ -130,6 +130,7 @@ nav {
   gap: 5%;
   padding-left: 7%;
   background-color: #f9b44d;
+  position: relative;
 }
 
 .nav-list li {
@@ -141,6 +142,37 @@ nav {
   color: #000000;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.login {
+  position: absolute;
+  right: 2%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: white !important;
+}
+
+.login-title {
+  padding: 2% 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5%;
+}
+
+.login-title h4 {
+  font-family: "Mukta Malar", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+.login-title hr {
+  width: 100%;
 }
 
 .nav-list li:hover {
@@ -335,7 +367,7 @@ nav {
   width: 100%;
   min-height: 10px;
   margin-top: 5%;
-  padding: 5%;
+  padding: 2% 5%;
   background-color: white;
 }
 
@@ -354,8 +386,9 @@ nav {
 .events-container {
   display: grid;
   grid-template-columns: 50% 50%;
-
+  min-height: 50%;
   justify-content: space-between;
+  position: relative;
 }
 
 .event-details {
@@ -369,13 +402,24 @@ nav {
 .events-right {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.events-img {
+  position: absolute;
   background-image: url("/Assets/Images/vin.jpg");
   background-position: center;
   background-size: cover;
+  width: 95%;
+  height: auto;
+  aspect-ratio: 1;
+  background-repeat: no-repeat;
 }
 
 .img-cover {
@@ -391,16 +435,10 @@ nav {
   );
 }
 
-.events-right img {
-  width: 80%;
-  height: auto;
-  aspect-ratio: 1;
-}
-
 .gallery {
   width: 100%;
   min-height: 10px;
-  padding: 2% 5%;
+  padding: 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -415,12 +453,31 @@ nav {
   position: absolute;
   width: 100%;
   height: 100%;
+  transform: scaleX(-1);
 }
+
 .gallery-title {
   display: grid;
-  justify-self: flex-start;
+  justify-self: stretch;
   align-self: flex-start;
   width: 100%;
+  z-index: 0;
+}
+
+.gallery-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.gallery-head h3 {
+  font-family: "Mukta malar", "san-serif";
+  font-weight: 500;
+}
+
+.gallery-head h5 {
+  cursor: pointer;
 }
 
 .gallery-content {
@@ -432,6 +489,39 @@ nav {
   width: 90%;
 }
 
+.about {
+  background-color: oklch(39.6% 0.141 25.723);
+  padding: 5%;
+}
+
+.about-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.about-title h3 {
+  font-family: "roboto", sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #f9b44d;
+}
+
+.about-title hr {
+  width: 100%;
+  color: #f9b44d;
+}
+
+.about-content h4 {
+  color: white;
+  font-family: "roboto", sans-serif;
+  font-weight: 400;
+  line-height: 2;
+  text-align: justify;
+}
 .poster {
   width: 100%;
   height: 100%;
