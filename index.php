@@ -21,7 +21,10 @@
     <link rel="stylesheet" href="/Assets/CSS/alert.css">
     <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
     <link rel="stylesheet" href="/Assets/CSS/model.css">
+    <link rel="stylesheet" href="/Assets/CSS/model2.css">
     <link rel="stylesheet" href="/Assets/CSS/login.css">
+    <link rel="stylesheet" href="Assets/CSS/eventTile.css">
+    <link rel="stylesheet" href="Assets/CSS/collection.css">
 
 </head>
 
@@ -163,17 +166,7 @@
             <hr>
         </div>
         <div class="events-container">
-            <div class="event-details">
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
-                <?php include('Components/eventTile.php') ?>
+            <div id="event-details" class="event-details">
 
             </div>
             <div class="events-right">
@@ -199,11 +192,7 @@
             <hr>
         </div>
 
-        <div class="gallery-content">
-            <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
-            <?php include("Components/collection.php") ?>
+        <div id="gallery-content" class="gallery-content">
 
         </div>
     </div>
@@ -227,7 +216,7 @@
         </div>
     </div>
 
-     <div class="footer bg-red-900">
+    <div class="footer bg-red-900">
         <div>
             <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
                 Productions</a>
@@ -264,6 +253,7 @@
                                 <button style="display: none;" id="submiting" disabled="true" class="upload"> logging
                                     in...
                                 </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -272,7 +262,26 @@
         </div>
     </div>
 
-   
+    <!-- Album Model -->
+    <div id="album-model" class="model-overlay2">
+        <div class="model-content2">
+            <div class="btn backbtn">
+                <span class="material-symbols-outlined">
+                    arrow_circle_left
+                </span>
+            </div>
+
+            <div class="btn rightBtn ">
+                <span class="material-symbols-outlined">
+                    arrow_circle_right
+                </span>
+            </div>
+
+            <div id="bgimg" class="bgimg">
+                <div onclick="closeAlbumView()" class="close-btn2">Close</div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
@@ -316,13 +325,24 @@
     //         }, 1000);
     //     }
     // }
-     function openLogin() {
+    document.getElementById("event-details").addEventListener("click", function(event) {
+        const cur = event.target.closest('.event');
+        const descElement = cur.querySelectorAll('div')[4];
+        let status = descElement.style.display == "block";
+        if (status) {
+            descElement.style.display = "none";
+        } else {
+            descElement.style.display = "block";
+        }
+    })
+
+    function openLogin() {
         // document.getElementById('frontImg').src = posters[currentIndex];
         document.getElementById('login-model').style.display = 'block';
     }
+
     function closeLoginViewer() {
         document.getElementById('login-model').style.display = 'none';
-        document.getElementById('frontImg').src = '';
     }
     const openMenue = document.querySelector('.openMenu');
     const closeMenu = document.querySelector('.closeMenu');
@@ -337,6 +357,113 @@
         closeMenu.setAttribute('style', 'display: none');
         mobileNav.setAttribute('style', 'display: none');
     })
+    let albumImages = [];
+    let currentIndex = 0;
+    let next = 0
+     const backBtn = document.querySelector('.backbtn');
+    const rightBtn = document.querySelector('.rightBtn');
+    const posterImg = document.getElementById('bgimg');
+  
+    backBtn.addEventListener('click', goBack);
+    rightBtn.addEventListener('click', goNext);
+    function closeAlbumView() {
+        document.getElementById('album-model').style.display = 'none';
+        currentIndex = 0;
+        next = 0;
+        backBtn.style.display = 'none'
+        rightBtn.style.display = 'block'
+    }
+
+    function openAlbum(data) {
+        albumImages = [];
+        // console.log(data);
+        data.split(' ,').forEach((el) => {
+            const single = el.split('katpakaVinayakar');
+            albumImages.push(single[1]);
+        })
+        document.getElementById('bgimg').style.backgroundImage = `url('${albumImages[0]}')`;
+        document.getElementById('album-model').style.display = 'block';
+    }
+   
+
+    function goBack() {
+        next = -1;
+        currentIndex -= 1;
+        updateAlbum();
+    }
+
+    function goNext() {
+        next = 1;
+        currentIndex += 1;
+        updateAlbum();
+    }
+
+    function updateAlbum() {
+        if (currentIndex == 0) {
+            backBtn.style.display = 'none';
+        } else if(currentIndex == albumImages.length-1){
+            rightBtn.style.display = 'none'
+        }else {
+            backBtn.style.display = 'block';
+            rightBtn.style.display = 'block';
+        }
+
+        if (next == 1) {
+            posterImg.classList.add('moveRightOff');
+            posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
+            // posterImg.classList.add('moveRightIn');
+            setTimeout(() => {
+                posterImg.classList.remove('moveRightOff');
+                posterImg.classList.add('moveRightIn');
+            }, 300);
+            setTimeout(() => {
+                posterImg.classList.remove('moveRightIn');
+            }, 600);
+        } else {
+    
+            posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
+          
+            posterImg.classList.add('moveleftOff');
+            setTimeout(() => {
+                posterImg.classList.remove('moveleftOff');
+                posterImg.classList.add('moveLeftIn');
+            }, 300);
+            setTimeout(() => {
+                posterImg.classList.remove('moveLeftIn');
+            }, 600);
+        }
+    }
+    //On Load Functions
+    function loadEvent() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetAllEventHome.php', true);
+        xhr.onload = function() {
+            console.log("sdsadsad");
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById("event-details").innerHTML = response.html;
+            }
+        }
+        xhr.send();
+    }
+
+    function loadAlbum() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetTopAlbums.php', true);
+        xhr.onload = function() {
+            // console.log("sdsadsad");
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById("gallery-content").innerHTML = response.html;
+            }
+        }
+        xhr.send();
+    }
+    window.onload = function() {
+        loadEvent();
+        loadAlbum();
+        // loadAlbum(1);
+    };
 </script>
 
 <!-- <script>

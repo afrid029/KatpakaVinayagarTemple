@@ -397,6 +397,8 @@ nav {
   flex-wrap: wrap;
   gap: 15px;
   justify-content: space-around;
+  align-items: center;
+  align-content: space-evenly;
 }
 
 .events-right {
@@ -553,7 +555,7 @@ nav {
   transition: all 2s ease;
   opacity: 1;
   transform: translateX(0%);
-  animation: moveRightOff 0.5s linear forwards alternate;
+  animation: moveRightOff 0.3s linear forwards alternate;
 }
 @keyframes moveRightOff {
   0% {
@@ -570,7 +572,7 @@ nav {
   transition: all 2s ease;
   opacity: 1;
   transform: translateX(0%);
-  animation: moveleftOff 0.5s linear forwards alternate;
+  animation: moveleftOff 0.3s linear forwards alternate;
 }
 @keyframes moveleftOff {
   0% {
@@ -587,7 +589,7 @@ nav {
   transition: all 2s ease;
   opacity: 0;
   transform: translateX(-100%);
-  animation: moveRightIn 0.5s linear forwards alternate;
+  animation: moveRightIn 0.3s linear forwards alternate;
 }
 
 @keyframes moveRightIn {
@@ -606,7 +608,7 @@ nav {
   transition: all 2s ease;
   opacity: 0;
   transform: translateX(100%);
-  animation: moveLeftIn 0.5s linear forwards alternate;
+  animation: moveLeftIn 0.3s linear forwards alternate;
 }
 
 @keyframes moveLeftIn {
@@ -631,10 +633,11 @@ nav {
   display: block;
 }
 
-.poster img {
+.poster .img {
   height: 100%;
   width: auto;
   cursor: pointer;
+  background-size: contain;
 }
 
 .footer {

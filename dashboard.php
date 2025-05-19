@@ -117,7 +117,7 @@
         </div>
     </div>
 
-      <!-- Edit Event -->
+    <!-- Edit Event -->
     <div id="edit-event-model" class="model-overlay">
         <div class="model-body">
             <div class="model-content">
@@ -137,7 +137,8 @@
                                 </div>
                                 <div class="FormRow">
                                     <label htmlFor="edit-description">Description</label>
-                                    <textarea type="textarea" name="edit-description" id="edit-description" required></textarea>
+                                    <textarea type="textarea" name="edit-description" id="edit-description"
+                                        required></textarea>
                                 </div>
                                 <div class="FormRow">
                                     <label htmlFor="edit-date">Date</label>
@@ -148,7 +149,8 @@
                                     <input type="time" name="edit-time" id="edit-time" required></input>
                                 </div>
 
-                                <button type="submit" id="edit-event-submit" name="submit" disabled="true" class="upload">
+                                <button type="submit" id="edit-event-submit" name="submit" disabled="true"
+                                    class="upload">
                                     Update
                                 </button>
 
@@ -321,6 +323,167 @@
         </div>
     </div>
 
+      <!-- Edit Gallery NOT IMPLEMENTED -->
+    <div id="edit-gallery-model" class="model-overlay">
+        <div class="model-body">
+            <div class="model-content">
+                <div class="login-form">
+                    <div onclick="removeEditListener()" class="close-btn">x</div>
+                    <div class="login-title">
+                        <h4>Edit Album</h4>
+                        <hr>
+                    </div>
+                    <div class="login-content">
+                        <form id="edit-album-form" method="post">
+                            <input type="text" name="ID" id="album-id" hidden>
+                            <div class="Form">
+                                <div class="FormRow">
+                                    <label htmlFor="edit-album">Album Name</label>
+                                    <input type="text" name="album" id="edit-album" required />
+                                </div>
+
+                                <!-- Images -->
+                                <!-- <div class="FormRow">
+                                    <small
+                                        style="color: gray; display: flex; width: 100%; font-size: 12px; margin-bottom: 5px; font-family: Lato, serif">Attach
+                                        Image(s)</small>
+                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                        id="edit-select-image" name="image[]" placeholder="Upload Images" multiple hidden>
+                                    <button class="image-btn" type="button" onclick="openEditImage()">select images</button>
+                                    <small class="small">Images required</small>
+                                    <div id="edit-preview-container"
+                                        style="display: flex; justify-content: center; gap: 5px; flex-wrap:wrap; margin-top: 10px;">
+                                    </div>
+                                </div> -->
+
+                                <!-- <script>
+                                    let allEditFiles = [];
+
+                                    function openEditImage() {
+                                        document.getElementById('edit-select-image').click();
+                                    }
+
+                                    function PreviewEditImages(event) {
+                                        // console.log("val");
+                                        const newFiles = Array.from(event.target.files);
+                                        // const files = event.target.files;
+                                        // if (newFiles.length + allFiles.length > 6) {
+                                        //     alert('You can select a maximum of 6 images.');
+                                        //     event.target.value = '';
+                                        //     validateAlbumForm(); // Clear the input (prevents submitting the 7th file)
+                                        //     return;
+                                        // }
+                                        allEditFiles = [...allFiles, ...newFiles];
+                                        // console.log(allFiles);
+                                        // console.log(fileNames);
+                                        event.target.value = '';
+                                        displayEditImages();
+                                        validateEditAlbumForm();
+                                        // Loop through the selected files
+                                    }
+
+                                    function displayEditImages() {
+                                        const previewContainer = document.getElementById('edit-preview-container');
+                                        previewContainer.innerHTML =
+                                            ''; // Clear the container before showing new images
+                                            
+                                            
+                                        for (let i = 0; i < allEditFiles.length; i++) {
+                                            const file = allEditFiles[i];
+                                            console.log(file);
+                                            // Check if the selected file is an image
+                                            if (file.type.startsWith('image/')) {
+                                                const reader = new FileReader();
+                                                reader.onload = function(e) {
+                                                    const divEl = document.createElement('div');
+                                                    divEl.style.width = '100px';
+                                                    divEl.style.height = 'auto';
+                                                    divEl.style.position = 'relative';
+                                                    divEl.style.display = 'flex'
+                                                    divEl.style.flexDirection = 'column'
+                                                    divEl.style.gap = '5px'
+                                                    divEl.style.backgroundColor = '#CBCBCB'
+                                                    divEl.style.borderRadius = '10px'
+                                                    const imgElement = document.createElement('img');
+                                                    imgElement.src = e.target.result;
+                                                    imgElement.style.borderRadius = '10px'
+                                                    imgElement.style.height = '100px';
+                                                    imgElement.style.width =
+                                                        '100px'; // Optional: resize the image for preview
+                                                    imgElement.style.objectFit =
+                                                        'cover'; // Optional: resize the image for preview
+                                                    // imgElement.style.margin = '10px';
+                                                    const delButton = document.createElement('button');
+                                                    delButton.textContent = 'Delete'
+                                                    delButton.style.position = 'relative';
+                                                    delButton.style.backgroundColor = '#670e0e';
+                                                    delButton.style.border = 'transparent';
+                                                    delButton.style.borderRadius = '10px';
+                                                    delButton.style.padding = '5px';
+                                                    delButton.style.color = 'white';
+                                                    delButton.style.cursor = 'pointer';
+                                                    delButton.type = 'button';
+                                                    delButton.onclick = function() {
+                                                        removeEditImage(i);
+                                                    }
+                                                    // Optional: add margin between images
+                                                    divEl.appendChild(imgElement)
+                                                    divEl.appendChild(delButton)
+                                                    previewContainer.appendChild(divEl);
+                                                };
+                                                reader.readAsDataURL(
+                                                    file); // Read the file as a data URL for previewing
+                                            } else {
+                                                alert('Please select only image files.');
+                                            }
+                                        }
+                                    }
+
+                                    function removeEditImage(index) {
+                                        // Remove the file from the allFiles array
+                                        allEditFiles.splice(index, 1);
+                                        // Re-render the file list
+                                        displayEditImages();
+                                        validateEditAlbumForm();
+                                    }
+                                </script> -->
+
+                                <button type="submit" id="edit-album-submit" name="submit" class="upload">
+                                    Update
+                                </button>
+
+                                <button style="display: none;" id="edit-album-submitting" disabled="true" class="upload">
+                                    Updating...
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+     <!-- Delete Gallery -->
+    <div class="del-modal-overlay" id="deleteAlbumModel">
+        <div class="del-modal-content" onclick="event.stopPropagation()">
+
+            <form id="delete-album-form" method="post" class="del-form">
+                <input type="text" hidden name='ID' id='del-album-id'>
+                <div class="delMsg">
+                    <h4>Do you want to delete this Album ?</h4>
+                </div>
+                <div class="option-btn ">
+                    <button onclick="handleModel('deleteAlbumModel', false)" class="opt no" type="button">No</button>
+                    <button name="del-submit" class="opt yes" id="del-album-submit" type="submit">Yes</button>
+                    <button style="display: none;" id="del-album-submiting" disabled="true" class="opt yes"> Yes
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
     <!-- View Events -->
     <div class="event-viewer">
         <div class="event-viewer-title">
@@ -329,7 +492,7 @@
         </div>
         <div id="loading-spinner" class="loading-spinner"></div>
         <div id="event-viewer-content" class="event-viewer-content">
-           
+
         </div>
 
     </div>
@@ -343,7 +506,7 @@
         </div>
         <div id="loading-spinner2" class="loading-spinner"></div>
         <div id="album-viewer-content" class="album-viewer-content">
-            
+
         </div>
 
         <div id="table-pagi"></div>
@@ -675,9 +838,8 @@
         }
         xhr.send(formData);
     })
-
     //Edit Event
-    function EditEvent(data){
+    function EditEvent(data) {
         document.getElementById("event-id").value = data.ID
         document.getElementById("edit-title").value = data.title
         document.getElementById("edit-description").value = data.description
@@ -685,9 +847,9 @@
         document.getElementById("edit-time").value = data.time
         validateEditEventForm();
         handleModel('edit-event-model', true);
-        
     }
-      function validateEditEventForm() {
+
+    function validateEditEventForm() {
         const title = document.getElementById("edit-title").value;
         const description = document.getElementById("edit-description").value;
         const date = document.getElementById("edit-date").value;
@@ -732,52 +894,41 @@
         }
         xhr.send(formData);
     })
-
     //Delete Event
-
-   function DeleteEvent(data) {
-    document.getElementById('del-event-id').value = data.ID;
-    handleModel('deleteEventModel', true)
-   }
-
-   document.getElementById('delete-event-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const submit = document.getElementById('del-event-submit');
-    const submiting = document.getElementById('del-event-submiting');
-    submit.style.display = 'none';
-    submiting.style.display = 'block';
-    // const id =  document.getElementById('del-event-id').value;
-
-    const form = document.getElementById('delete-event-form');
-    const formData = new FormData(form);
-    formData.append('del-submit', true);
-
-
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/Controllers/AddEvent.php', true);
-    xhr.onload = function() {
-        if(xhr.status == 200 && xhr.readyState == 4){
-            var response = JSON.parse(xhr.responseText);
-            if(xhr.status){
-                alertRise(true, response.message);
-                handleModel('deleteEventModel', false);
-                loadEvent();
-            }else {
-                alertRise(false, response.message);
-            }
-        }else {
-            console.log('XHR Error', xhr.status);
-            
-        }
-
-        submit.style.display = 'block';
-        submiting.style.display = 'none';
+    function DeleteEvent(data) {
+        document.getElementById('del-event-id').value = data.ID;
+        handleModel('deleteEventModel', true)
     }
-
-    xhr.send(formData);
-   })
-
+    document.getElementById('delete-event-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const submit = document.getElementById('del-event-submit');
+        const submiting = document.getElementById('del-event-submiting');
+        submit.style.display = 'none';
+        submiting.style.display = 'block';
+        // const id =  document.getElementById('del-event-id').value;
+        const form = document.getElementById('delete-event-form');
+        const formData = new FormData(form);
+        formData.append('del-submit', true);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Controllers/AddEvent.php', true);
+        xhr.onload = function() {
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                var response = JSON.parse(xhr.responseText);
+                if (xhr.status) {
+                    alertRise(true, response.message);
+                    handleModel('deleteEventModel', false);
+                    loadEvent();
+                } else {
+                    alertRise(false, response.message);
+                }
+            } else {
+                console.log('XHR Error', xhr.status);
+            }
+            submit.style.display = 'block';
+            submiting.style.display = 'none';
+        }
+        xhr.send(formData);
+    })
     //Add Album
     function addListener() {
         document.getElementById('select-image').addEventListener('change', PreviewImages);
@@ -837,6 +988,113 @@
             }
             submit.style.display = "block";
             submitting.style.display = "none";
+        }
+        xhr.send(formData);
+    })
+
+    //Edit Album NOT IMPLEMENTED
+    function EditAlbum(data) {
+        // console.log(data.images.split(" ,"));
+        document.getElementById('edit-album').value = data.event;
+        document.getElementById('album-id').value = data.ID;
+        handleModel('edit-gallery-model', true); 
+    }
+
+    function addEditListener() {
+        document.getElementById('edit-select-image').addEventListener('change', PreviewEditImages);
+        handleModel('edit-gallery-model', true);
+    }
+
+    function removeEditListener() {
+        document.getElementById('select-image').removeEventListener('change', PreviewEditImages);
+        handleModel('edit-gallery-model', false);
+    }
+
+    function validateEditAlbumForm() {
+        const album = document.getElementById('edit-album').value.length > 0;
+        const selectedImage = document.getElementById('edit-select-image').value;
+        let button = document.getElementById('edit-album-submit');
+        //console.log(selectedImage);
+        if (album && allEditFiles.length > 0) {
+            console.log("true");
+            button.disabled = false;
+        } else {
+            console.log("false");
+            button.disabled = true;
+        }
+    }
+    document.getElementById("edit-album-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        // console.log("kjhjkhk");
+        let submit = document.getElementById("edit-album-submit");
+        let submitting = document.getElementById("edit-album-submitting");
+        submit.style.display = "none";
+        submitting.style.display = "block";
+        // event.preventDefault();
+        const form = document.getElementById('edit-album-form')
+        const formData = new FormData(form);
+        // allEditFiles.forEach(file => {
+        //     formData.append('image[]', file);
+        // });
+       
+        formData.append('edit-submit', true);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "Controllers/AddAlbum.php", true);
+        xhr.onload = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status) {
+                    alertRise(true, response.message)
+                    // removeEditListener();
+                    handleModel('edit-gallery-model', false);
+                    document.getElementById('edit-album-form').reset();
+                    // validateEditAlbumForm();
+                    // allEditFiles = [];
+                    // displayEditImages();
+                    loadAlbum(1)
+                } else {
+                    alertRise(false, response.message)
+                }
+            } else {
+                console.log("Error in XMLHttpRequest ", xhr.readyState);
+            }
+            submit.style.display = "block";
+            submitting.style.display = "none";
+        }
+        xhr.send(formData);
+    })
+    // Delete Album
+    function DeleteAlbum(data) {
+        document.getElementById('del-album-id').value = data.ID;
+        handleModel('deleteAlbumModel', true)
+    }
+    document.getElementById('delete-album-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const submit = document.getElementById('del-album-submit');
+        const submiting = document.getElementById('del-album-submiting');
+        submit.style.display = 'none';
+        submiting.style.display = 'block';
+        // const id =  document.getElementById('del-event-id').value;
+        const form = document.getElementById('delete-album-form');
+        const formData = new FormData(form);
+        formData.append('del-submit', true);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Controllers/AddAlbum.php', true);
+        xhr.onload = function() {
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                var response = JSON.parse(xhr.responseText);
+                if (xhr.status) {
+                    alertRise(true, response.message);
+                    handleModel('deleteAlbumModel', false);
+                    loadAlbum(1);
+                } else {
+                    alertRise(false, response.message);
+                }
+            } else {
+                console.log('XHR Error', xhr.status);
+            }
+            submit.style.display = 'block';
+            submiting.style.display = 'none';
         }
         xhr.send(formData);
     })
@@ -924,77 +1182,63 @@
         }
         xhr.send(formData);
     })
-
     //ON load handles.
-      function loadEvent() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/Controllers/GetAllEvents.php', true);
-            document.getElementById('loading-spinner').style.display = 'block';
-            // const onload = document.getElementById('onrowload');
-            // onload.classList.add('onrowload');
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('loading-spinner').style.display = 'none';
-                    // document.getElementById('onrowload').style.display = 'none';
-                    // onload.classList.remove('onrowload');
-
-                    var response = JSON.parse(xhr.responseText);
-
-                    const dataContainer = document.getElementById('event-viewer-content')
-
-                    dataContainer.innerHTML = response.html;
-                    // resizeWindow();
-
-                    // dataContainer.classList.remove('fade-in'); // Remove the class to reset animation
-                    // void dataContainer.offsetWidth; // Trigger reflow
-                    // dataContainer.classList.add('fade-in'); // Apply fade-in animation
-                    // document.getElementById('table-pagi').innerHTML = response.pagination;
-
-                    // if (page === 1) {
-                    //     // document.getElementById('count').textContent = "From " + response.total + " donations";
-                    //     DisplayNumber(response.total, 'current')
-                    // }
-                }
-            };
-
-            xhr.send();
-        }
-
-        function loadAlbum(page){
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/Controllers/GetAllAlbums.php?page=' + page, true);
-            document.getElementById('loading-spinner2').style.display = 'block';
-            // const onload = document.getElementById('onrowload');
-            // onload.classList.add('onrowload');
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('loading-spinner2').style.display = 'none';
-                    // document.getElementById('onrowload').style.display = 'none';
-                    // onload.classList.remove('onrowload');
-                    var response = JSON.parse(xhr.responseText);
-
-                    const dataContainer = document.getElementById('album-viewer-content')
-
-                    dataContainer.innerHTML = response.html;
-                    // resizeWindow();
-
-                    // dataContainer.classList.remove('fade-in'); // Remove the class to reset animation
-                    // void dataContainer.offsetWidth; // Trigger reflow
-                    // dataContainer.classList.add('fade-in'); // Apply fade-in animation
-                    document.getElementById('table-pagi').innerHTML = response.pagination;
-                }
-            };
-
-            xhr.send();
-        }
-
-        // Load the first page initially
-        window.onload = function() {
-            loadEvent();
-            loadAlbum(1);
+    function loadEvent() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetAllEvents.php', true);
+        document.getElementById('loading-spinner').style.display = 'block';
+        // const onload = document.getElementById('onrowload');
+        // onload.classList.add('onrowload');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('loading-spinner').style.display = 'none';
+                // document.getElementById('onrowload').style.display = 'none';
+                // onload.classList.remove('onrowload');
+                var response = JSON.parse(xhr.responseText);
+                const dataContainer = document.getElementById('event-viewer-content')
+                dataContainer.innerHTML = response.html;
+                // resizeWindow();
+                // dataContainer.classList.remove('fade-in'); // Remove the class to reset animation
+                // void dataContainer.offsetWidth; // Trigger reflow
+                // dataContainer.classList.add('fade-in'); // Apply fade-in animation
+                // document.getElementById('table-pagi').innerHTML = response.pagination;
+                // if (page === 1) {
+                //     // document.getElementById('count').textContent = "From " + response.total + " donations";
+                //     DisplayNumber(response.total, 'current')
+                // }
+            }
         };
+        xhr.send();
+    }
+
+    function loadAlbum(page) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetAllAlbums.php?page=' + page, true);
+        document.getElementById('loading-spinner2').style.display = 'block';
+        // const onload = document.getElementById('onrowload');
+        // onload.classList.add('onrowload');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('loading-spinner2').style.display = 'none';
+                // document.getElementById('onrowload').style.display = 'none';
+                // onload.classList.remove('onrowload');
+                var response = JSON.parse(xhr.responseText);
+                const dataContainer = document.getElementById('album-viewer-content')
+                dataContainer.innerHTML = response.html;
+                // resizeWindow();
+                // dataContainer.classList.remove('fade-in'); // Remove the class to reset animation
+                // void dataContainer.offsetWidth; // Trigger reflow
+                // dataContainer.classList.add('fade-in'); // Apply fade-in animation
+                document.getElementById('table-pagi').innerHTML = response.pagination;
+            }
+        };
+        xhr.send();
+    }
+    // Load the first page initially
+    window.onload = function() {
+        loadEvent();
+        loadAlbum(1);
+    };
     //Alert Raise
     function alertRise(status, message) {
         document.getElementById('alert-text').innerText = message;

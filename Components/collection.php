@@ -1,25 +1,11 @@
-<html>
-
-<head>
-    <link rel="stylesheet" href="Assets/CSS/collection.css">
-
-</head>
-
-<body>
-    
-
-    <div class="collect">
+<div onclick="openAlbum('<?php echo $images ?>')" class="collect">
         <div class="images">
-            <div class="rightSide"></div>
-            <div class="leftSide"></div>
+            <div style="background-image: url('<?php echo $img1; ?>');" class="rightSide"></div>
+            <div style="background-image: url('<?php echo $img2; ?>');" class="leftSide"></div>
         </div>
 
         <div class="collect-title">
-            <h5>Vinyagar Chathurthi 2025</h5>
+            <h5><?php echo $event ?></h5>
         </div>
 
-    </div>
-</body>
-
-
-</html>
+</div>

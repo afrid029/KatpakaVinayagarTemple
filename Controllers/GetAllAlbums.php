@@ -40,16 +40,16 @@ if (mysqli_num_rows($result) > 0) {
                 <hr>
                 <div class='album-action'>
                     <div class='album-btn'>
-                        <button class='edit'>Edit</button>
-                        <button class='delete'>Delete</button>
+                        <button onclick='EditAlbum(".json_encode($row).")' class='edit'>Edit</button>
+                        <button onclick='DeleteAlbum(".json_encode($row).")' class='delete'>Delete</button>
                     </div>
                 </div>
                
             </div>";
     }
 } else {
-    $html .= "<div class='table-row'>
-    <div style='grid-column: span 5; text-align: center; font-size: 12px; font-weight:700;'>No Albums Found.</div>
+    $html .= "<div style='display: grid;justify-self: flex-start;width: 100%'>
+    <div style='grid-column: span 5; text-align: left; font-size: 12px; font-weight:700;'>No Albums Found.</div>
     </div>";
 }
 

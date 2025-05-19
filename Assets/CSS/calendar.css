@@ -1,0 +1,290 @@
+body {
+  background-color: #e2aa555e;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.left {
+  background-color: oklch(39.6% 0.141 25.723);
+  position: relative;
+
+  /* position: absolute; */
+}
+
+.right {
+  background-color: oklch(39.6% 0.141 25.723);
+  position: relative;
+}
+
+.side-bg {
+  background-image: url("/Assets/Images/vertbg.PNG");
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0.4;
+}
+
+.about {
+  background-color: oklch(39.6% 0.141 25.723);
+  padding: 5%;
+}
+
+.about-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.about-title h3 {
+  font-family: "roboto", sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #f9b44d;
+}
+
+.about-title hr {
+  width: 100%;
+  color: #f9b44d;
+}
+
+.about-content h4 {
+  color: white;
+  font-family: "roboto", sans-serif;
+  font-weight: 400;
+  line-height: 2;
+  text-align: justify;
+}
+
+.content {
+  overflow-y: auto;
+  padding-bottom: 15px;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  font-family: "roboto", sans-serif;
+  color: #832423;
+  font-size: 1.4rem;
+  position: relative;
+}
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.toggle small {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #c3e528;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #f3b421;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.calendar {
+  position: relative;
+  width: 90%;
+  /* height: 100%; */
+  margin: auto;
+  padding: 2%;
+}
+
+.calendar hr {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  background-color: black;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.backbtn {
+  left: 15px;
+  display: none;
+}
+.material-symbols-outlined {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+.moveRightOff {
+  /* transform: translateX(-100%); */
+  transition: all 2s ease;
+  opacity: 1;
+  transform: translateX(0%);
+  animation: moveRightOff 0.3s linear forwards alternate;
+}
+@keyframes moveRightOff {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.moveLeftOff {
+  /* transform: translateX(-100%); */
+  transition: all 2s ease;
+  opacity: 1;
+  transform: translateX(0%);
+  animation: moveleftOff 0.3s linear forwards alternate;
+}
+@keyframes moveleftOff {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.moveRightIn {
+  /* transform: translateX(-100%); */
+  transition: all 2s ease;
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: moveRightIn 0.3s linear forwards alternate;
+}
+
+@keyframes moveRightIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.moveLeftIn {
+  /* transform: translateX(-100%); */
+  transition: all 2s ease;
+  opacity: 0;
+  transform: translateX(100%);
+  animation: moveLeftIn 0.3s linear forwards alternate;
+}
+
+@keyframes moveLeftIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.material-symbols-outlined {
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.rightBtn {
+  right: 15px;
+  display: block;
+}
+.close-btn2 {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: "roboto" sans-serif;
+  font-weight: 600;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+}
+
+.bgimg,
+.bgimg2 {
+  background-size: contain;
+  width: 95%;
+  height: 70%;
+  margin: auto;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/Public/Calendar/April\(E\).jpg");
+}
+
+.bgimg2 {
+  background-image: url("/Public/Calendar/English\ Summary.jpg") !important;
+}

@@ -1,8 +1,6 @@
 <?php
 include('DbConnectivity.php');
 
-
-
 $total_received = '';
 
 $query="SELECT *
@@ -17,25 +15,16 @@ $html = '';
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        $html .= "
+        $name = $row['title'];
+        $date = $row['date'];
+        $time = $row['time'];
+        $desc = $row['description'];
+        ob_start();
+        include(__DIR__ . '/../Components/eventTile.php');
+        $content = ob_get_clean(); 
 
-
-                     <div class='event-card'>
-                <div class='event-title'>
-                   ".$row['title']."
-                </div>
-                <hr>
-                <div class='event-info'>
-                   <div class='event-action'>
-                        <p>". $row['date'] ."</p>
-                        <p>". $row['time'] ."</p>
-                   </div>
-                    <div class='event-btn'>
-                        <button onclick='EditEvent(".json_encode($row).")' class='edit'>Edit</button>
-                        <button onclick='DeleteEvent(".json_encode($row).")' class='delete'>Delete</button>
-                    </div>
-                </div>
-            </div>";
+        $html .= $content;
+        // echo $html;
     }
 } else {
     $html .= "<div style='display: grid;justify-self: flex-start;width: 100%'>

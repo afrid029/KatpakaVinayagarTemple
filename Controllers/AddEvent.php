@@ -88,16 +88,22 @@ if(isset($_POST['submit'])){
     $result = mysqli_query($db, $query);
 
     if($result){
+
+        mysqli_close($db);
          echo json_encode([
             'status' => true,
             'message' => 'Program Deleted Successfully'
         ]);
 
+        exit();
+
     } else {
+        mysqli_close($db);
          echo json_encode([
             'status' => false,
             'message' => 'Unable to delete. Try again later'
         ]);
+        exit();
 
     }
 }

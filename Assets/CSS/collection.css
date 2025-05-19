@@ -28,11 +28,12 @@
   background-position: center;
   background-size: cover;
   transition: all 0.2s ease;
+  box-shadow: 0 0 4px white;
 }
 
 .leftSide {
   position: absolute;
-  transform: rotate(20deg);
+  /* transform: rotate(20deg); */
   left: 25px;
   background-image: url("/Assets/Images/vin2.jpg");
   width: 70%;
@@ -42,15 +43,21 @@
   background-position: center;
   background-size: cover;
   transition: all 0.2s ease;
+  box-shadow: 0 0 4px white;
 }
 
 .collect:hover .rightSide {
   transform: rotate(0deg);
   transition: all 0.2s ease;
+  z-index: 1;
 }
 
 .collect:hover .leftSide {
   transform: rotate(0deg);
   left: 50px;
   transition: all 0.2s ease;
+}
+
+.collect-title h5 {
+  text-align: center;
 }

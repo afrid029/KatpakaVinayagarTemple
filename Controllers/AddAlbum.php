@@ -115,5 +115,65 @@ if(isset($_POST['submit'])){
        
     }
 
+}elseif(isset($_POST['edit-submit'])) {
+    include('DbConnectivity.php');
+    $ID = $_POST['ID'];
+    $album = $_POST['album'];
+// var_dump($_POST);
+    $query = "UPDATE gallery set event = '$album' WHERE ID = '$ID'";
+    $result = mysqli_query($db, $query);
+
+    if($result) {
+        mysqli_close($db);
+        echo json_encode([
+            'status' => true,
+            'message' => 'Album updated!'
+        ]);
+        exit();
+    } else {
+         mysqli_close($db);
+        echo json_encode([
+            'status' => false,
+            'message' => 'Unable to update Album!'
+        ]);
+        exit();
+    }
+} elseif(isset($_POST['del-submit'])){
+    include('DbConnectivity.php');
+
+    $ID = $_POST['ID'];
+
+    mysqli_begin_transaction($db);
+
+    $query = "SELECT * FROM gallery WHERE ID = '$ID'";
+    $fetchedata = mysqli_query($db, $query);
+
+    $query = "DELETE from gallery WHERE ID = '$ID'";
+    $result = mysqli_query($db, $query);
+
+    if($result) {
+        mysqli_commit($db);
+        while($row = mysqli_fetch_assoc($fetchedata)) {
+            if(file_exists($row['image'])){
+                unlink($row['image']);
+            }
+        }
+
+        mysqli_close($db);
+         echo json_encode([
+            'status' => true,
+            'message' => 'Album Deleted!'
+        ]);
+        exit();
+
+    } else {
+        mysqli_rollback($db);
+        mysqli_close($db);
+         echo json_encode([
+            'status' => false,
+            'message' => 'Unable to delete Album!'
+        ]);
+        exit();
+    }
 }
 ?>
