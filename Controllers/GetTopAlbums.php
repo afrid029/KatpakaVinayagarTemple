@@ -30,7 +30,7 @@ if (mysqli_num_rows($result) > 0) {
     }
 } else {
     $html .= "<div style='display: grid;justify-self: flex-start;width: 100%'>
-    <div style='grid-column: span 5; text-align: left; font-size: 12px; font-weight:700;'>No Albums Found.</div>
+    <div class='no-event'>No Albums Found.</div>
     </div>";
 }
 

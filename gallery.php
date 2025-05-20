@@ -1,4 +1,3 @@
-<?php SESSION_START() ?>
 <html lang="en">
 
 <head>
@@ -17,15 +16,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_circle_right" /> -->
 
     <link rel="stylesheet" href="/Assets/CSS/index.css">
-    <link rel="stylesheet" href="/Assets/CSS/calendar.css">
-    <link rel="stylesheet" href="/Assets/CSS/nav.css">
-    <!-- <link rel="stylesheet" href="/Assets/CSS/alert.css">
-    <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
+    <!-- <link rel="stylesheet" href="/Assets/CSS/nav.css"> -->
+    <!-- <link rel="stylesheet" href="/Assets/CSS/alert.css">!-->
+    <link rel="stylesheet" href="/Assets/CSS/pagination.css"> 
     <!-- <link rel="stylesheet" href="/Assets/CSS/model.css"> -->
-    <link rel="stylesheet" href="/Assets/CSS/model3.css">
+    <link rel="stylesheet" href="/Assets/CSS/model2.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/login.css"> -->
     <!-- <link rel="stylesheet" href="Assets/CSS/eventTile.css"> -->
-    <!-- <link rel="stylesheet" href="Assets/CSS/collection.css"> -->
+    <link rel="stylesheet" href="Assets/CSS/collection.css">
 
 </head>
 <nav class="bg-red-900">
@@ -53,10 +51,10 @@
             </div>
 
             <ul class="nav-list">
-                 <li ><a href="/">Home</a></li>
-                <li class="active">Calendar</li>
+                <li ><a href="/">Home</a></li>
+                <li ><a href="/calendar">Calendar</a></li>
                 <li onclick="openNoticeModel()">Notice</li>
-                <li><a href="/gallery">Gallery</a></li>
+                <li class="active">Gallery</li>
                 <li onclick="gotoAbout()">About</li>
 
             </ul>
@@ -74,11 +72,10 @@
         </div>
     </div>
 </nav>
-
 <body>
 
     <!-- Mobile Navigations -->
-    <div class="mobile-nav">
+     <div class="mobile-nav">
         <div class="mobile-nav-list">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
@@ -93,7 +90,7 @@
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
-                Calendar</div>
+                <a href="/calendar">Calendar</a></div>
             <div onclick="openNoticeModel()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
@@ -107,7 +104,7 @@
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
-                <a href="/gallery">Gallery</a></div>
+                Gallery</div>
             <div onclick="gotoAbout()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
@@ -120,55 +117,72 @@
 
     </div>
 
-    <div class="main">
-        <div class="left">
-            <div class="side-bg"></div>
+    <!-- Gallery -->
+
+      <div class="gallery">
+
+        <div class="gallery-bg"></div>
+        <div class="gallery-title">
+            <div class="gallery-head">
+                <h3>Gallery</h3>
+               
+            </div>
+            <hr>
+        </div>
+
+        <div id="gallery-content" class="gallery-content">
 
         </div>
-        <div class="content">
-            <div class="month">
-                <div class="toggle">
-                    <small>த</small>
-                    <label class="switch">
-                        <input type="checkbox" id="toggleSwitch">
-                        <span class="slider"></span>
-                    </label>
-                    <small>E</small>
-                </div>
-                <h4 id="month">May - 2025</h4>
-                <hr>
-            </div>
-            <div class="calendar">
-                <div class="btn backbtn">
-                    <span class="material-symbols-outlined">
-                        arrow_circle_left
-                    </span>
-                </div>
 
-                <div class="btn rightBtn ">
-                    <span class="material-symbols-outlined">
-                        arrow_circle_right
-                    </span>
-                </div>
+        <div id="table-pagi"></div>
+    </div>
 
-                <div id="bgimg" class="bgimg">
-                </div>
 
-                <hr>
-            </div>
-            <div class="event-sum">
-                <div id="bgimg2" class="bgimg bgimg2">
-                </div>
+     <!-- Album Model -->
+    <div id="album-model" class="model-overlay2">
+        <div class="model-content2">
+            <div onclick="closeAlbumView()" class="close-btn2">Close</div>
+            <div class="btn backbtn">
+                <span class="material-symbols-outlined">
+                    arrow_circle_left
+                </span>
             </div>
 
-        </div>
-        <div class="right">
-            <div class="side-bg"></div>
+            <div class="btn rightBtn ">
+                <span class="material-symbols-outlined">
+                    arrow_circle_right
+                </span>
+            </div>
 
+            <div id="bgimg" class="bgimg">
+                
+            </div>
         </div>
     </div>
 
-    <!-- AboutUs -->
+    
+       <!-- Notice Model -->
+    <div id="notice-model" class="model-overlay2">
+        <div class="model-content2">
+            <div onclick="closeNoticeModel()" class="close-btn2">Close</div>
+            <div id="leftNot" class="btn backbtn">
+                <span class="material-symbols-outlined">
+                    arrow_circle_left
+                </span>
+            </div>
+
+            <div id="rightNot" class="btn rightBtn ">
+                <span class="material-symbols-outlined">
+                    arrow_circle_right
+                </span>
+            </div>
+            <div id="bgimg3" class="bgimg">
+                
+            </div>
+        </div>
+    </div>
+
+     <!-- AboutUs -->
     <div class="about">
         <div class="about-title">
             <h3>About Us</h3>
@@ -186,7 +200,6 @@
             </h4>
         </div>
     </div>
-
        <div class="footer bg-red-900">
         <div>
             <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
@@ -194,36 +207,12 @@
         </div>
 
     </div>
-     
-       <!-- Notice Model -->
-    <div id="notice-model" class="model-overlay2">
-        <div class="model-content2">
-            <div onclick="closeNoticeModel()" class="close-btn2">Close</div>
-            <div id="leftNot" class="btn backbtn">
-                <span class="material-symbols-outlined">
-                    arrow_circle_left
-                </span>
-            </div>
-
-            <div id="rightNot" class="btn rightBtn ">
-                <span class="material-symbols-outlined">
-                    arrow_circle_right
-                </span>
-            </div>
-            <div id="bgimg3" class="bgimgx">
-                
-            </div>
-        </div>
-    </div>
 
 </body>
 
-</html>
-
 <script>
-
  function gotoAbout(val) {
-    closeMobileMenu();
+     closeMobileMenu();
         const element = document.querySelector('.about');
         if (!val) {
             // slideBar(false);
@@ -246,7 +235,7 @@
 
     }
 
-    const openMenue = document.querySelector('.openMenu');
+     const openMenue = document.querySelector('.openMenu');
     const closeMenu = document.querySelector('.closeMenu');
     const mobileNav = document.querySelector('.mobile-nav');
    openMenue.addEventListener('click', openMobileMenu)
@@ -267,189 +256,69 @@
         
         mobileNav.setAttribute('style', 'display: none');
     }
-    let isTamil = true;
-    let calendar;
-    let month;
-    let monthName;
-    let year;
-    let next = 0;
-    const backBtn = document.querySelector('.backbtn');
+    
+    let albumImages = [];
+    let currentIndex = 0;
+    let next = 0
+     const backBtn = document.querySelector('.backbtn');
     const rightBtn = document.querySelector('.rightBtn');
     const posterImg = document.getElementById('bgimg');
-    const eventPoster = document.getElementById('bgimg2')
-    const curMonth = document.getElementById('month');
-
-    rightBtn.addEventListener("click", function() {
-        next = 1;
-        month += 1;
-        updateIndex();
-    })
-    backBtn.addEventListener("click", function () {
-        next = -1;
-        month -= 1;
-        updateIndex();
-    })
-
-    document.getElementById("toggleSwitch").addEventListener("change", function() {
-        if (this.checked) {
-            isTamil = false;
-            
-            
-        } else {
-            isTamil = true;
-
-        }
+  
+    backBtn.addEventListener('click', goBack);
+    rightBtn.addEventListener('click', goNext);
+    function closeAlbumView() {
+        document.getElementById('album-model').style.display = 'none';
+        currentIndex = 0;
         next = 0;
-        setCalendarImage();
-        // updateIndex();
-    });
-
-    function updateIndex() {
-        
-        setCalendarImage();
-    }
-    function setMonth() {
-        const today = new Date();
-        month = today.getMonth() + 1; // getMonth() returns 0-11
-        year = today.getFullYear(); // 
-
-        setCalendarImage();
+        backBtn.style.display = 'none'
+        rightBtn.style.display = 'block'
     }
 
-    function setCalendarImage() {
-        let key;
-        let summary;
+    function openAlbum(data) {
+        albumImages = [];
+        // console.log(data);
+        data.split(' ,').forEach((el) => {
+            const single = el.split('katpakaVinayakar');
+            albumImages.push(single[1]);
+        })
+        document.getElementById('bgimg').style.backgroundImage = `url('${albumImages[0]}')`;
+        document.getElementById('album-model').style.display = 'block';
+    }
+   
 
-         if (month == 1) {
+    function goBack() {
+        next = -1;
+        currentIndex -= 1;
+        updateAlbum();
+    }
+
+    function goNext() {
+        next = 1;
+        currentIndex += 1;
+        updateAlbum();
+    }
+
+    function updateAlbum() {
+        if (currentIndex == 0) {
             backBtn.style.display = 'none';
-        } else if(month == 12){
+            rightBtn.style.display = 'block';
+            // console.log(1);
+            
+        } else if(currentIndex == albumImages.length-1){
             rightBtn.style.display = 'none'
+             backBtn.style.display = 'block';
+            // console.log(2);
+            
         }else {
             backBtn.style.display = 'block';
             rightBtn.style.display = 'block';
+            // console.log(3);
+            
         }
 
-
-        if(isTamil){
-           summary = 'tamEvent'
-            switch (month) {
-                case 1:
-                    key = 'tamJan'
-                    monthName = "தை"
-                    break;
-                case 2:
-                    key = 'tamFeb'
-                    monthName = "மாசி"
-                    break;
-                case 3:
-                    key = 'tamMar'
-                    monthName = "பங்குனி"
-                    break;
-                case 4:
-                    key = 'tamApr'
-                    monthName = "சித்திரை"
-                    break;
-                case 5:
-                    key = 'tamMay'
-                    monthName = "வைகாசி"
-                    break;
-                case 6:
-                    key = 'tamJun'
-                    monthName = "ஆனி"
-                    break;
-                case 7:
-                    key = 'tamJul'
-                    monthName = "ஆடி"
-                    break;
-                case 8:
-                    key = 'tamAug'
-                    monthName = "ஆவணி"
-                    break;
-                case 9:
-                    key = 'tamSep'
-                    monthName = "புரட்டாதி"
-                    break;
-                case 10:
-                    key = 'tamOct'
-                    monthName = "ஐப்பசி"
-                    break;
-                case 11:
-                    key = 'tamNov'
-                    monthName = "கார்த்திகை"
-                    break;
-                case 12:
-                    key = 'tamDec'
-                    monthName = "மார்கழி"
-                    break;
-            
-                default:
-                    break;
-            }
-        }else {
-            summary = 'engEvent'
-            switch (month) {
-                case 1:
-                    key = 'engJan';
-                    monthName = "Thai"
-                    break;
-                case 2:
-                    key = 'engFeb'
-                    monthName = "Maasi"
-                    break;
-                case 3:
-                    key = 'engMar'
-                    monthName = "Panguni"
-                    break;
-                case 4:
-                    key = 'engApr'
-                    monthName = "Chittirai"
-                    break;
-                case 5:
-                    key = 'engMay'
-                    monthName = "Vaikasi"
-                    break;
-                case 6:
-                    key = 'engJun'
-                    monthName = "Aani"
-                    break;
-                case 7:
-                    key = 'engJul'
-                    monthName = "Aadi"
-                    break;
-                case 8:
-                    key = 'engAug'
-                    monthName = "Aavani"
-                    break;
-                case 9:
-                    key = 'engSep'
-                    monthName = 'Purattasi'
-                    break;
-                case 10:
-                    key = 'engOct'
-                    monthName = 'Aippasi'
-                    break;
-                case 11:
-                    key = 'engNov'
-                    monthName = 'Karthikai'
-                    break;
-                case 12:
-                    key = 'engDec'
-                    monthName = 'Markazhi'
-                    break;
-            
-                default:
-                    break;
-            }
-        }
-
-        let selectImg = calendar[key].split('katpakaVinayakar')[1];
-        let selectEvent = calendar[summary].split('katpakaVinayakar')[1];
-        console.log(selectEvent);
-        
         if (next == -1) {
             posterImg.classList.add('moveRightOff');
-            // posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
-             posterImg.style.backgroundImage = `url('${selectImg}')`;
+            posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
             // posterImg.classList.add('moveRightIn');
             setTimeout(() => {
                 posterImg.classList.remove('moveRightOff');
@@ -458,9 +327,9 @@
             setTimeout(() => {
                 posterImg.classList.remove('moveRightIn');
             }, 600);
-        } else if(next == 1) {
+        } else {
     
-           posterImg.style.backgroundImage = `url('${selectImg}')`;
+            posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
           
             posterImg.classList.add('moveleftOff');
             setTimeout(() => {
@@ -470,16 +339,9 @@
             setTimeout(() => {
                 posterImg.classList.remove('moveLeftIn');
             }, 600);
-        } else {
-            posterImg.style.backgroundImage = `url('${selectImg}')`;
         }
-
-       
-        eventPoster.style.backgroundImage = `url('${selectEvent}')`;
-        curMonth.innerHTML = monthName + ' - ' + year;
     }
 
-    
      //Notice Handling
     let notice = [];
     let noticeIndex = 0;
@@ -491,7 +353,7 @@
     right.addEventListener('click', updateNotice);
 
     function openNoticeModel() {
-        closeMobileMenu();
+         closeMobileMenu();
         document.getElementById('notice-model').style.display = 'block';
          noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
          noticeIndex = 1
@@ -581,25 +443,27 @@
         xhr.send();
     }
 
-
-    //OnLoad 
-    function loadCalendar() {
+    
+     function loadAlbum(page) {
+        
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/Controllers/GetCalendar.php', true);
+        xhr.open('GET', '/Controllers/GetAllAlbum.php?page='+page, true);
         xhr.onload = function() {
+            // console.log("sdsadsad");
             if (xhr.status == 200 && xhr.readyState == 4) {
                 var response = JSON.parse(xhr.responseText);
-                // console.log(response.data);
-                calendar = response.data[0];
-// console.log(calendar);
-
-                setMonth()
+                document.getElementById("gallery-content").innerHTML = response.html;
+                document.getElementById('table-pagi').innerHTML = response.pagination;
             }
         }
         xhr.send();
     }
-    window.onload = function() {
-        loadCalendar();
+
+     window.onload = function() {
+       
+        loadAlbum(1);
         loadNotice();
-    }
+       
+    };
 </script>
+</html>

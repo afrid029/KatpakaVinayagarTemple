@@ -17,8 +17,8 @@
 
     <!-- <link rel="stylesheet" href="/Assets/CSS/index.css"> -->
     <!-- <link rel="stylesheet" href="/Assets/CSS/Form.css">
-    <link rel="stylesheet" href="/Assets/CSS/alert.css">
-    <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
+    <link rel="stylesheet" href="/Assets/CSS/alert.css"> !-->
+    <!-- <link rel="stylesheet" href="/Assets/CSS/pagination.css"> -->
     <link rel="stylesheet" href="/Assets/CSS/model.css">
     <link rel="stylesheet" href="/Assets/CSS/dashboard.css">
     <link rel="stylesheet" href="/Assets/CSS/login.css">

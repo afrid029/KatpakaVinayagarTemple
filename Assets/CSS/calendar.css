@@ -2,6 +2,23 @@ body {
   background-color: #e2aa555e;
 }
 
+
+
+.footer,
+nav {
+  background-color: oklch(39.6% 0.141 25.723);
+}
+
+.flxdir {
+  flex-direction: column;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 10rem;
+}
+
+
 .main {
   display: grid;
   grid-template-columns: 15% 70% 15%;
@@ -282,9 +299,18 @@ input:checked + .slider:before {
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url("/Public/Calendar/April\(E\).jpg");
+  /* background-image: url("/Public/Calendar/April\(E\).jpg"); */
 }
 
-.bgimg2 {
-  background-image: url("/Public/Calendar/English\ Summary.jpg") !important;
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+}
+
+.footer div {
+  font-family: "Roboto", sans-serif;
+  color: white;
 }

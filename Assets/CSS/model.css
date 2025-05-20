@@ -71,9 +71,11 @@
   align-items: center;
   top: 20px;
   right: 20px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  /* width: 30px;
+  height: 30px; */
+  padding: 8px;
+  border-radius: 8px;
+ 
   background-color: rgb(0, 0, 0);
   cursor: pointer;
   color: rgb(255, 255, 255);
@@ -165,8 +167,8 @@
   }
 
   .close-btn {
-    width: 60px;
-    height: 60px;
+    /* width: 60px;
+    height: 60px; */
     font-size: 1.5rem;
   }
 
@@ -180,8 +182,8 @@
   }
 
   .close-btn {
-    width: 30px;
-    height: 30px;
+    /* width: 30px;
+    height: 30px; */
     font-size: 1.1rem;
   }
 
@@ -196,8 +198,8 @@
   }
 
   .close-btn {
-    width: 25px;
-    height: 25px;
+    /* width: 25px;
+    height: 25px; */
     font-size: 0.9rem;
   }
 
@@ -212,8 +214,8 @@
   }
 
   .close-btn {
-    width: 22px;
-    height: 22px;
+    /* width: 22px;
+    height: 22px; */
     font-size: 0.8rem;
   }
 
@@ -228,8 +230,8 @@
   }
 
   .close-btn {
-    width: 25px;
-    height: 25px;
+    /* width: 25px;
+    height: 25px; */
     font-size: 0.8rem;
   }
 
