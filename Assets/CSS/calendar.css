@@ -2,8 +2,6 @@ body {
   background-color: #e2aa555e;
 }
 
-
-
 .footer,
 nav {
   background-color: oklch(39.6% 0.141 25.723);
@@ -17,7 +15,6 @@ nav {
   justify-content: space-between;
   height: 10rem;
 }
-
 
 .main {
   display: grid;
@@ -94,7 +91,7 @@ nav {
 
 .month {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
   padding: 10px;
   text-align: center;
@@ -103,12 +100,14 @@ nav {
   color: #832423;
   font-size: 1.4rem;
   position: relative;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .toggle {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  /* position: absolute; */
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
   right: 20px;
   display: flex;
   align-items: center;
@@ -302,7 +301,6 @@ input:checked + .slider:before {
   /* background-image: url("/Public/Calendar/April\(E\).jpg"); */
 }
 
-
 .footer {
   display: flex;
   justify-content: center;
@@ -313,4 +311,355 @@ input:checked + .slider:before {
 .footer div {
   font-family: "Roboto", sans-serif;
   color: white;
+}
+
+@media (min-width: 2800px) {
+  .month {
+    font-size: 2rem;
+  }
+
+  .toggle {
+    gap: 12px;
+  }
+
+  .toggle small {
+    font-size: 1.6rem;
+  }
+
+  .switch {
+    width: 80px;
+    height: 40px;
+  }
+
+  .slider:before {
+    width: 35px;
+    height: 35px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(40px);
+  }
+}
+
+@media (max-width: 2800px) {
+  .month {
+    font-size: 1.7rem;
+  }
+
+  .toggle {
+    gap: 10px;
+  }
+
+  .toggle small {
+    font-size: 1.1rem;
+  }
+
+  .switch {
+    width: 70px;
+    height: 35px;
+  }
+
+  .slider:before {
+    width: 30px;
+    height: 30px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(35px);
+  }
+}
+
+@media (max-width: 1920px) {
+  .month {
+    font-size: 1.3rem;
+  }
+
+  .toggle {
+    gap: 10px;
+  }
+
+  .toggle small {
+    font-size: 1rem;
+  }
+
+  .switch {
+    width: 50px;
+    height: 25px;
+  }
+
+  .slider:before {
+    width: 20px;
+    height: 20px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(25px);
+  }
+}
+
+@media (max-width: 1440px) {
+  .month {
+    font-size: 1rem;
+  }
+
+  .toggle {
+    gap: 10px;
+  }
+
+  .toggle small {
+    font-size: 0.8rem;
+  }
+
+  .switch {
+    width: 40px;
+    height: 20px;
+  }
+
+  .slider:before {
+    width: 15px;
+    height: 15px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(20px);
+  }
+}
+
+@media (max-width: 1280px) {
+  .month {
+    font-size: 0.8rem;
+  }
+
+  .toggle {
+    gap: 10px;
+  }
+
+  .toggle small {
+    font-size: 0.6rem;
+  }
+
+  .switch {
+    width: 30px;
+    height: 15px;
+  }
+
+  .slider:before {
+    width: 10px;
+    height: 10px;
+  }
+  input:checked + .slider:before {
+    transform: translateX(15px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .main {
+    grid-template-columns: 10% 80% 10%;
+  }
+  .month {
+    font-size: 0.7rem;
+  }
+
+  .toggle {
+    gap: 10px;
+  }
+
+  .toggle small {
+    font-size: 0.5rem;
+  }
+
+  .switch {
+    width: 20px;
+    height: 10px;
+  }
+
+ 
+  .slider:before {
+    width: 8px;
+    height: 8px;
+    top: 10%;
+    left: 0px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(10px);
+  }
+
+  .bgimg,
+  .bgimg2 {
+    height: 40%;
+  }
+}
+
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 8% 84% 8%;
+  }
+  .month {
+    font-size: 0.6rem;
+  }
+
+  .toggle {
+    gap: 10px;
+  }
+
+  .toggle small {
+    font-size: 0.5rem;
+  }
+
+  .switch {
+    width: 20px;
+    height: 10px;
+  }
+
+  .slider:before {
+    width: 8px;
+    height: 8px;
+    top: 9%;
+  }
+   input:checked + .slider:before {
+    transform: translateX(10px);
+  }
+
+  .bgimg,
+  .bgimg2 {
+    height: 40%;
+    width: 98%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: 6% 88% 6%;
+  }
+  .month {
+    font-size: 0.6rem;
+  }
+
+  .toggle {
+    gap: 10px;
+  }
+
+  .toggle small {
+    font-size: 0.5rem;
+  }
+
+  .switch {
+    width: 20px;
+    height: 10px;
+  }
+
+  .slider:before {
+    width: 8px;
+    height: 8px;
+  }
+
+  .bgimg,
+  .bgimg2 {
+    height: 55%;
+    width: 98%;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    grid-template-columns: 4% 92% 4%;
+  }
+  .month {
+    font-size: 0.9rem;
+  }
+
+  .toggle {
+    gap: 8px;
+  }
+
+  .toggle small {
+    font-size: 0.6rem;
+  }
+
+  .switch {
+    width: 40px;
+    height: 20px;
+  }
+
+  .slider:before {
+    width: 18px;
+    height: 18px;
+  }
+
+   input:checked + .slider:before {
+    transform: translateX(18px);
+  }
+  .calendar {
+    width: 98%;
+  }
+  .bgimg,
+  .bgimg2 {
+    height: 45%;
+    width: 98%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    grid-template-columns: 3% 94% 3%;
+  }
+  .month {
+    font-size: 0.7rem;
+  }
+
+  .toggle {
+    gap: 6px;
+  }
+
+  .toggle small {
+    font-size: 0.5rem;
+  }
+
+  .switch {
+    width: 40px;
+    height: 20px;
+  }
+
+  .slider:before {
+    width: 18px;
+    height: 18px;
+  }
+
+   input:checked + .slider:before {
+    transform: translateX(18px);
+  }
+
+  .calendar {
+    width: 98%;
+  }
+  .bgimg,
+  .bgimg2 {
+    height: 40%;
+    width: 98%;
+  }
+}
+
+@media (max-width: 400px) {
+  .month {
+    font-size: 0.5rem;
+  }
+
+  .toggle {
+    gap: 6px;
+  }
+
+  .toggle small {
+    font-size: 0.4rem;
+  }
+
+  .switch {
+    width: 36px;
+    height: 18px;
+  }
+
+  .slider:before {
+    width: 15px;
+    height: 15px;
+  }
 }

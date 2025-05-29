@@ -22,7 +22,7 @@ switch ($request) {
     case '/login':
         require 'Controllers/login.php';  
     break;
-    case '/logoff':
+    case '/logout':
         require 'Controllers/logoff.php';
     break;
     case '/dashboard':

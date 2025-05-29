@@ -218,6 +218,10 @@ nav {
   justify-content: space-between;
 }
 
+.event-ttl {
+  color:brown; font-weight: 600; font-size: 1.5rem;
+}
+
 .event-card {
   width: 45%;
   border-radius: 10px;
@@ -434,5 +438,160 @@ nav {
   }
   100% {
     background-position: 50% 0%;
+  }
+}
+
+
+@media (max-width : 700px) {
+  .nav-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .logout {
+    font-size: 0.8rem;
+  }
+
+  .logout svg {
+    height: 18px;
+  }
+
+  .createBtn {
+    font-size: 0.8rem;
+  }
+
+  .createBtn svg {
+    height: 15px;
+  }
+  .cal-body {
+    grid-template-columns: 100%;
+  }
+  .event-card {
+    width: 60%;
+  }
+
+  .event-viewer-content {
+    justify-content: center;
+  }
+
+  .month label {
+    font-size: 0.8rem;
+  }
+
+  .month input {
+    font-size: 0.8rem;
+  }
+
+  .month button {
+    font-size: 0.8rem;
+  }
+  .event-ttl {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width : 600px) {
+
+  .nav-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .logout {
+    font-size: 0.5rem;
+  }
+
+  .logout svg {
+    height: 15px;
+  }
+
+  .createBtn {
+    font-size: 0.6rem;
+  }
+
+  .createBtn svg {
+    height: 12px;
+  }
+
+  .event-card {
+    width: 80%;
+  }
+
+  .event-title, .album-title {
+    font-size: 0.8rem;
+  }
+
+  .album-card {
+    width: 40%;
+  }
+
+  .event-action {
+    font-size: 0.5rem;
+  }
+
+  .edit, .delete {
+    font-size: 0.4rem;
+  }
+
+   .month label {
+    font-size: 0.6rem;
+  }
+
+  .month input {
+    font-size: 0.5rem;
+  }
+
+  .month button {
+    font-size: 0.6rem;
+  }
+
+  .upload {
+    font-size: 0.9rem;
+  }
+   .event-ttl {
+    font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width : 400px) {
+
+  .nav-content h3 {
+    font-size: 1rem;
+  }
+
+  .logout {
+    font-size: 0.5rem;
+  }
+
+  .logout svg {
+    height: 12px;
+  }
+
+  .createBtn {
+    font-size: 0.6rem;
+    padding-right: 8px;
+  }
+
+  .createBtn svg {
+    height: 12px;
+  }
+   .event-title,.album-title {
+    font-size: 0.6rem;
+  }
+
+   .month label {
+    font-size: 0.6rem;
+  }
+
+  .month input {
+    font-size: 0.4rem;
+  }
+
+  .month button {
+    font-size: 0.5rem;
+  }
+   .upload {
+    font-size: 0.7rem;
+  }
+   .event-ttl {
+    font-size: 0.7rem;
   }
 }

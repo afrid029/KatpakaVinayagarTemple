@@ -224,6 +224,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .login-form {
+    width: 95%;
+  }
+}
+
 @media (max-width: 600px) {
   .model-title {
     font-size: 1rem;

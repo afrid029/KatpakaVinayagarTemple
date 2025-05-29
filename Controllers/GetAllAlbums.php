@@ -18,8 +18,8 @@ $total_records = $row['total'];
 
 $total_received = '';
 
-$query="SELECT ID, event, GROUP_CONCAT(image SEPARATOR ' ,') as images, uploadedDate FROM gallery
-group by ID 
+$query="SELECT ID, MAX(event) as event , GROUP_CONCAT(image SEPARATOR ' ,') as images, MAX(uploadedDate) AS uploadedDate FROM gallery
+group by ID
 Order by uploadedDate desc
 LIMIT $offset, $results_per_page";
 

@@ -97,6 +97,7 @@
   margin-bottom: 10px !important;
   margin: auto;
   text-align: left;
+  font-family: 'roboto', sans-serif;
 }
 
 .FormRow input {
@@ -214,6 +215,10 @@
     margin: auto;
     letter-spacing: 4px;
   }
+
+  .upload {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 400px) {
@@ -221,5 +226,9 @@
     font-size: 15px;
     margin: auto;
     letter-spacing: 3px;
+  }
+
+  .upload {
+    font-size: 0.5rem;
   }
 }

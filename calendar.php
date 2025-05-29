@@ -16,12 +16,13 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_circle_right" /> -->
 
-    <link rel="stylesheet" href="/Assets/CSS/index.css">
+   
     <link rel="stylesheet" href="/Assets/CSS/calendar.css">
     <link rel="stylesheet" href="/Assets/CSS/nav.css">
+     <link rel="stylesheet" href="/Assets/CSS/index.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/alert.css">
     <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
-    <!-- <link rel="stylesheet" href="/Assets/CSS/model.css"> -->
+     <link rel="stylesheet" href="/Assets/CSS/model.css"> 
     <link rel="stylesheet" href="/Assets/CSS/model3.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/login.css"> -->
     <!-- <link rel="stylesheet" href="Assets/CSS/eventTile.css"> -->
@@ -127,6 +128,7 @@
         </div>
         <div class="content">
             <div class="month">
+                <h4 id="month">May - 2025</h4>
                 <div class="toggle">
                     <small>த</small>
                     <label class="switch">
@@ -135,9 +137,10 @@
                     </label>
                     <small>E</small>
                 </div>
-                <h4 id="month">May - 2025</h4>
-                <hr>
+                
+               
             </div>
+             <hr>
             <div class="calendar">
                 <div class="btn backbtn">
                     <span class="material-symbols-outlined">
@@ -190,7 +193,7 @@
        <div class="footer bg-red-900">
         <div>
             <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
-                Productions</a>
+                Productions IT</a>
         </div>
 
     </div>
@@ -215,12 +218,137 @@
             </div>
         </div>
     </div>
+    
+     <div id="image-viewer" class="model-overlay">
+        <div class="model-body">
+            <div onclick="closeImageViewer()" class="close-btn">x</div>
+            <div class="model-content">
+                <div class="image-viewer-container">
+                    <div class="image-viewer">
+                        <img id="frontImg" src="" alt="Front Page">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
 </body>
 
 </html>
 
 <script>
+
+let startX, startY, endX, endY;
+  let isSwipe = false;
+
+  const swipeArea = document.getElementById("bgimg");
+
+  // Handle touch start
+  swipeArea.addEventListener("touchstart", (e) => {
+    isSwipe = false;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  });
+
+  // Handle touch move
+  swipeArea.addEventListener("touchmove", (e) => {
+    const moveX = e.touches[0].clientX;
+    const moveY = e.touches[0].clientY;
+    const dx = moveX - startX;
+    const dy = moveY - startY;
+
+    // If movement is more than a few pixels, treat as swipe
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+      isSwipe = true;
+    }
+  });
+
+  // Handle touch end
+  swipeArea.addEventListener("touchend", (e) => {
+    if (!isSwipe) return; // Don't trigger swipe if it's a tap
+
+    endX = e.changedTouches[0].clientX;
+    endY = e.changedTouches[0].clientY;
+
+    const dx = endX - startX;
+    const dy = endY - startY;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 30) {
+         next = 1;
+        month += 1;
+        updateIndex();
+      } else if (dx > -30) {
+        next = -1;
+        month -= 1;
+        updateIndex();
+      }
+    } else {
+    //   if (dy > 30) {
+    //     alert("Swiped Down");
+    //   } else if (dy < -30) {
+    //     alert("Swiped Up");
+    //   }
+    }
+  });
+
+  // Handle click
+  swipeArea.addEventListener("click", (e) => {
+    if (isSwipe) {
+      // Ignore click if a swipe occurred
+      e.preventDefault();
+      return;
+    }
+    // alert("Clicked!");
+
+    const input = e.target.style.backgroundImage;
+            const path = input.slice(5, -2);
+
+
+        document.getElementById('frontImg').setAttribute('src', path)
+        document.getElementById('image-viewer').style.display = 'block'
+
+  });
+
+// document.getElementById('bgimg').addEventListener('click', (e)=>{
+        
+//         const input = e.target.style.backgroundImage;
+//             const path = input.slice(5, -2);
+
+
+//         document.getElementById('frontImg').setAttribute('src', path)
+//         document.getElementById('image-viewer').style.display = 'block'
+
+        
+//     })
+    document.getElementById('bgimg2').addEventListener('click', (e)=>{
+        
+        const input = e.target.style.backgroundImage;
+            const path = input.slice(5, -2);
+
+
+        document.getElementById('frontImg').setAttribute('src', path)
+        document.getElementById('image-viewer').style.display = 'block'
+
+        
+    })
+    document.getElementById('bgimg3').addEventListener('click', (e)=>{
+        
+        const input = e.target.style.backgroundImage;
+            const path = input.slice(5, -2);
+
+
+        document.getElementById('frontImg').setAttribute('src', path)
+        document.getElementById('image-viewer').style.display = 'block'
+
+        
+    })
+
+    function closeImageViewer() {
+        document.getElementById('image-viewer').style.display = 'none';
+    }
 
  function gotoAbout(val) {
     closeMobileMenu();
@@ -265,7 +393,9 @@
 
     function closeMobileMenu() {
         
-        mobileNav.setAttribute('style', 'display: none');
+       mobileNav.setAttribute('style', 'display: none');
+        //  closeMenu.setAttribute('style', 'display: none');
+        // openMenue.setAttribute('style', 'display: block');
     }
     let isTamil = true;
     let calendar;
@@ -390,51 +520,51 @@
             switch (month) {
                 case 1:
                     key = 'engJan';
-                    monthName = "Thai"
+                    monthName = "January"
                     break;
                 case 2:
                     key = 'engFeb'
-                    monthName = "Maasi"
+                    monthName = "February"
                     break;
                 case 3:
                     key = 'engMar'
-                    monthName = "Panguni"
+                    monthName = "March"
                     break;
                 case 4:
                     key = 'engApr'
-                    monthName = "Chittirai"
+                    monthName = "April"
                     break;
                 case 5:
                     key = 'engMay'
-                    monthName = "Vaikasi"
+                    monthName = "May"
                     break;
                 case 6:
                     key = 'engJun'
-                    monthName = "Aani"
+                    monthName = "June"
                     break;
                 case 7:
                     key = 'engJul'
-                    monthName = "Aadi"
+                    monthName = "July"
                     break;
                 case 8:
                     key = 'engAug'
-                    monthName = "Aavani"
+                    monthName = "August"
                     break;
                 case 9:
                     key = 'engSep'
-                    monthName = 'Purattasi'
+                    monthName = 'September'
                     break;
                 case 10:
                     key = 'engOct'
-                    monthName = 'Aippasi'
+                    monthName = 'October'
                     break;
                 case 11:
                     key = 'engNov'
-                    monthName = 'Karthikai'
+                    monthName = 'November'
                     break;
                 case 12:
                     key = 'engDec'
-                    monthName = 'Markazhi'
+                    monthName = 'December'
                     break;
             
                 default:
@@ -442,8 +572,8 @@
             }
         }
 
-        let selectImg = calendar[key].split('katpakaVinayakar')[1];
-        let selectEvent = calendar[summary].split('katpakaVinayakar')[1];
+        let selectImg = calendar[key].split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1];
+        let selectEvent = calendar[summary].split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1];
         console.log(selectEvent);
         
         if (next == -1) {
@@ -564,12 +694,13 @@
                 // console.log(response.data);
 
                 let tamilN = response.data[0].tamil;
+                console.log(tamilN)
                 notice.push(
-                    tamilN.split('katpakaVinayakar')[1]
+                    tamilN.split('<?php echo $_SERVER['DOCUMENT_ROOT']?>')[1]
                 )
                 let englishN = response.data[0].eng;
                 notice.push(
-                    englishN.split('katpakaVinayakar')[1]
+                    englishN.split('<?php echo $_SERVER['DOCUMENT_ROOT']?>')[1]
                 )
 
                 console.log(notice);

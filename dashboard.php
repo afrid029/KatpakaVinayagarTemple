@@ -1,3 +1,4 @@
+<?php SESSION_START() ?>
 <html lang="en">
 
 <head>
@@ -41,7 +42,7 @@
                     <path
                         d="M480-120q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840v106q-106.26 0-180.13 73.87Q226-586.26 226-480q0 106.26 73.87 180.13Q373.74-226 480-226v106Zm160-141.35L565.35-337l90-90H347v-106h308.35l-90-91L640-698.65 858.65-480 640-261.35Z" />
                 </svg>
-                Logout
+                <a href="/logout">Logout</a>
             </div>
 
         </div>
@@ -49,6 +50,67 @@
 </nav>
 
 <body>
+
+
+<?php
+    
+    if (isset($_SESSION['fromAction']) && $_SESSION['fromAction'] === true) { ?>
+
+
+        <div class="alert-container" id="alertSecond">
+            <div class="alert" id="alertContSecond">
+                <p><?php echo $_SESSION['message'] ?></p>
+            </div>
+        </div>
+
+        <?php
+        if ($_SESSION['status'] === true) {
+            echo "<script>document.getElementById('alertContSecond').style.backgroundColor = '#1D7524';</script>";
+        } else {
+            echo "<script>document.getElementById('alertContSecond').style.backgroundColor = '#E44C4C';</script>";
+        }
+        ?>
+        <script>
+            document.getElementById('alertSecond').style.display = 'flex';
+            
+            console.log('Alert triggerdd');
+        
+
+            setTimeout(() => {
+                document.getElementById('alertSecond').style.display = 'none';
+            }, 7000);
+        </script>
+    <?php
+    }
+    $_SESSION['fromAction'] = false;
+
+    if (!isset($_COOKIE['user'])) {
+        header('Location: /');
+        echo "<script>window.location.pathname = '/'</script>";
+        exit();
+    } else {
+
+        $data = base64_decode($_COOKIE['user']);
+
+        // Extract the IV (the first 16 bytes)
+        $iv = substr($data, 0, 16);
+
+        // Extract the encrypted email (the rest of the string)
+        $encryptedData = substr($data, 16);
+        $key = 'YD3rEAXKcb4rc67whX13gR81LAc7YQjXLZgQowkU3/Q=';
+        // Decrypt the email using AES-256-CBC decryption
+        $decryptedData = openssl_decrypt($encryptedData, 'aes-256-cbc', $key, 0, $iv);
+
+        // $query = "SELECT * from users where email = '$decryptedEmail'";
+        $passedArray = unserialize($decryptedData);
+        // $result = mysqli_query($db, $query);
+
+            $_SESSION['email'] = $passedArray['email'];
+            $_SESSION['role'] = $passedArray['role'];
+       
+    }
+
+    ?>
 
     <div class="add-buttons">
         <div onclick="handleModel('event-model', true)" class="createBtn">
@@ -487,7 +549,7 @@
     <!-- View Events -->
     <div class="event-viewer">
         <div class="event-viewer-title">
-            <h2 style="color:brown; font-weight: 600; font-size: 1.5rem;">Events</h2>
+            <h2 class="event-ttl" >Events</h2>
             <hr>
         </div>
         <div id="loading-spinner" class="loading-spinner"></div>
@@ -501,7 +563,7 @@
 
     <div class="album-viewer">
         <div class="album-viewer-title">
-            <h2 style="color:brown; font-weight: 600; font-size: 1.5rem;">Albums</h2>
+            <h2 class="event-ttl">Albums</h2>
             <hr>
         </div>
         <div id="loading-spinner2" class="loading-spinner"></div>
@@ -516,7 +578,7 @@
     <!-- Add Calendar -->
 
     <div class="form-bg">
-        <h2 style="color:brown; font-weight: 600; font-size: 1.5rem;">Calendar Update</h2>
+        <h2 class="event-ttl">Calendar Update</h2>
         <hr style="margin-top: 2%; margin-bottom: 2%">
         <div id="cal-Form" class="cal-body">
 

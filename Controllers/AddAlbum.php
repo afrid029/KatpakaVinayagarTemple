@@ -1,26 +1,28 @@
 <?php
+
+ if (!isset($_COOKIE['user'])) {
+    header('Location: /');
+    echo "<script>window.location.pathname = '/'</script>";
+    exit();
+}
+
 if(isset($_POST['submit'])){
 
     function deleteDirectory($dir) {
-    if (!file_exists($dir)) return true;
+        if (!file_exists($dir)) return true;
 
-    if (!is_dir($dir)) return unlink($dir); // delete file if not directory
+        if (!is_dir($dir)) return unlink($dir); // delete file if not directory
 
-    foreach (scandir($dir) as $item) {
-        if ($item === '.' || $item === '..') continue;
+        foreach (scandir($dir) as $item) {
+            if ($item === '.' || $item === '..') continue;
 
-        $path = $dir . DIRECTORY_SEPARATOR . $item;
-        deleteDirectory($path);
+            $path = $dir . DIRECTORY_SEPARATOR . $item;
+            deleteDirectory($path);
+        }
+
+        return rmdir($dir); // remove empty directory
     }
 
-    return rmdir($dir); // remove empty directory
-}
-
-    // if (!isset($_COOKIE['user'])) {
-    //     header('Location: /');
-    //     exit();
-    // }
-    // SESSION_START();
 
     include('DbConnectivity.php');
 
@@ -71,9 +73,9 @@ if(isset($_POST['submit'])){
             $result = $result && $res;
         } else {
             deleteDirectory($targetDirectory);
-            $_SESSION['message'] = "Failed to upload Images. Try again later!";
-            $_SESSION['status'] = false;
-            $_SESSION['fromAction'] = true;
+            // $_SESSION['message'] = "Failed to upload Images. Try again later!";
+            // $_SESSION['status'] = false;
+            // $_SESSION['fromAction'] = true;
             mysqli_rollback($db);
             mysqli_close($db);
             echo json_encode([
@@ -91,9 +93,9 @@ if(isset($_POST['submit'])){
     if($result){
         mysqli_commit($db);
         mysqli_close($db);
-        $_SESSION['message'] = "Beneficiary Created successfully!";
-        $_SESSION['status'] = true;
-        $_SESSION['fromAction'] = true;
+        // $_SESSION['message'] = "Beneficiary Created successfully!";
+        // $_SESSION['status'] = true;
+        // $_SESSION['fromAction'] = true;
         echo json_encode([
             'status' => true,
             'message' => 'Album Created successfully!'
@@ -104,9 +106,9 @@ if(isset($_POST['submit'])){
     }else {
         mysqli_rollback($db);
         mysqli_close($db);
-        $_SESSION['message'] = "Unable to create. Try Again Later!";
-        $_SESSION['status'] = false;
-        $_SESSION['fromAction'] = true;
+        // $_SESSION['message'] = "Unable to create. Try Again Later!";
+        // $_SESSION['status'] = false;
+        // $_SESSION['fromAction'] = true;
         echo json_encode([
             'status' => false,
             'message' => 'Unable to create. Try Again Later!'

@@ -43,44 +43,7 @@ if (mysqli_num_rows($result) > 0) {
     </div>";
 }
 
-// $html .= '</tbody></table>';
 
-// // Calculate total pages
-// $total_pages = ceil($total_records / $results_per_page);
-
-// // Generate pagination links
-// $pagination = "<div class='pagination'>";
-// if ($page > 1) {
-//     $pagination .= "<span class='textPagi' href='javascript:void(0);' onclick='loadPage(" . ($page - 1) . ")'>Previous</span> ";
-// }
-
-// for ($i = 1; $i <= $total_pages; $i++) {
-//     if ($i == $page) {
-//         $pagination .= "<strong class='selected'>$i</strong> ";
-//     } else if ($i == 1) {
-//         $pagination .= "<span href='javascript:void(0);' onclick='loadPage($i)'>$i</span> ";
-//     } else if ($i == $total_pages) {
-//         $pagination .= "<span href='javascript:void(0);' onclick='loadPage($i)'>$i</span> ";
-//     } else if (abs($i - $page) < 3) {
-//         $pagination .= "<span href='javascript:void(0);' onclick='loadPage($i)'>$i</span> ";
-//     } else {
-//         if (substr($pagination, -3) !== '...') {
-//             $pagination .= ".";
-//         }
-//     }
-
-//     // if ($i == $page) {
-//     //     $pagination .= "<strong>$i</strong> ";
-//     // } else {
-//     //     $pagination .= "<a href='javascript:void(0);' onclick='loadPage($i)'>$i</a> ";
-//     // }
-// }
-
-// if ($page < $total_pages) {
-//     $pagination .= "<span class='textPagi' href='javascript:void(0);' onclick='loadPage(" . ($page + 1) . ")'>Next</span>";
-// }
-
-// $pagination .= "</div>";
 
 mysqli_close($db);
 

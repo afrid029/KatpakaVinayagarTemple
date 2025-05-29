@@ -1,13 +1,12 @@
 <?php
+
+ if (!isset($_COOKIE['user'])) {
+    header('Location: /');
+    echo "<script>window.location.pathname = '/'</script>";
+    exit();
+}
+
 if(isset($_POST['tamilsubmit'])){
-
-
-
-    // if (!isset($_COOKIE['user'])) {
-    //     header('Location: /');
-    //     exit();
-    // }
-    // SESSION_START();
 
     include('DbConnectivity.php');
 
@@ -29,9 +28,9 @@ if(isset($_POST['tamilsubmit'])){
             $result = $res;
         } else {
             // deleteDirectory($targetDirectory);
-            $_SESSION['message'] = "Failed to upload Image. Try again later!";
-            $_SESSION['status'] = false;
-            $_SESSION['fromAction'] = true;
+            // $_SESSION['message'] = "Failed to upload Image. Try again later!";
+            // $_SESSION['status'] = false;
+            // $_SESSION['fromAction'] = true;
             mysqli_close($db);
             echo json_encode([
             'status' => false,
@@ -46,9 +45,9 @@ if(isset($_POST['tamilsubmit'])){
 
     if($result){
         mysqli_close($db);
-        $_SESSION['message'] = "Beneficiary Created successfully!";
-        $_SESSION['status'] = true;
-        $_SESSION['fromAction'] = true;
+        // $_SESSION['message'] = "Beneficiary Created successfully!";
+        // $_SESSION['status'] = true;
+        // $_SESSION['fromAction'] = true;
         echo json_encode([
             'status' => true,
             'message' => 'Notice Updated successfully!'
@@ -59,9 +58,9 @@ if(isset($_POST['tamilsubmit'])){
     }else {
         // mysqli_rollback($db);
         mysqli_close($db);
-        $_SESSION['message'] = "Unable to create. Try Again Later!";
-        $_SESSION['status'] = false;
-        $_SESSION['fromAction'] = true;
+        // $_SESSION['message'] = "Unable to create. Try Again Later!";
+        // $_SESSION['status'] = false;
+        // $_SESSION['fromAction'] = true;
         echo json_encode([
             'status' => false,
             'message' => 'Unable to update. Try Again Later!'
@@ -72,17 +71,7 @@ if(isset($_POST['tamilsubmit'])){
 
 }else if(isset($_POST['englishsubmit'])){
 
-
-
-    // if (!isset($_COOKIE['user'])) {
-    //     header('Location: /');
-    //     exit();
-    // }
-    // SESSION_START();
-
     include('DbConnectivity.php');
-
-
 
     $result = true;
 
@@ -100,9 +89,9 @@ if(isset($_POST['tamilsubmit'])){
             $result = $res;
         } else {
             // deleteDirectory($targetDirectory);
-            $_SESSION['message'] = "Failed to upload Image. Try again later!";
-            $_SESSION['status'] = false;
-            $_SESSION['fromAction'] = true;
+            // $_SESSION['message'] = "Failed to upload Image. Try again later!";
+            // $_SESSION['status'] = false;
+            // $_SESSION['fromAction'] = true;
             mysqli_close($db);
             echo json_encode([
             'status' => false,
@@ -117,9 +106,9 @@ if(isset($_POST['tamilsubmit'])){
 
     if($result){
         mysqli_close($db);
-        $_SESSION['message'] = "Beneficiary Created successfully!";
-        $_SESSION['status'] = true;
-        $_SESSION['fromAction'] = true;
+        // $_SESSION['message'] = "Beneficiary Created successfully!";
+        // $_SESSION['status'] = true;
+        // $_SESSION['fromAction'] = true;
         echo json_encode([
             'status' => true,
             'message' => 'Notice Updated successfully!'
@@ -130,9 +119,9 @@ if(isset($_POST['tamilsubmit'])){
     }else {
         // mysqli_rollback($db);
         mysqli_close($db);
-        $_SESSION['message'] = "Unable to create. Try Again Later!";
-        $_SESSION['status'] = false;
-        $_SESSION['fromAction'] = true;
+        // $_SESSION['message'] = "Unable to create. Try Again Later!";
+        // $_SESSION['status'] = false;
+        // $_SESSION['fromAction'] = true;
         echo json_encode([
             'status' => false,
             'message' => 'Unable to update. Try Again Later!'

@@ -19,7 +19,7 @@
     <!-- <link rel="stylesheet" href="/Assets/CSS/nav.css"> -->
     <!-- <link rel="stylesheet" href="/Assets/CSS/alert.css">!-->
     <link rel="stylesheet" href="/Assets/CSS/pagination.css"> 
-    <!-- <link rel="stylesheet" href="/Assets/CSS/model.css"> -->
+    <link rel="stylesheet" href="/Assets/CSS/model.css">
     <link rel="stylesheet" href="/Assets/CSS/model2.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/login.css"> -->
     <!-- <link rel="stylesheet" href="Assets/CSS/eventTile.css"> -->
@@ -203,14 +203,39 @@
        <div class="footer bg-red-900">
         <div>
             <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
-                Productions</a>
+                Productions IT</a>
         </div>
 
+    </div>
+    
+     <div id="image-viewer" class="model-overlay">
+        <div class="model-body">
+            <div onclick="closeImageViewer()" class="close-btn">x</div>
+            <div class="model-content">
+                <div class="image-viewer-container">
+                    <div class="image-viewer">
+                        <img id="frontImg" src="" alt="Front Page">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 
 </body>
 
 <script>
+document.getElementById('bgimg3').addEventListener('click', (e) => {
+        const input = e.target.style.backgroundImage;
+        const path = input.slice(5, -2);
+        document.getElementById('frontImg').setAttribute('src', path)
+        document.getElementById('image-viewer').style.display = 'block'
+    })
+
+    function closeImageViewer() {
+        document.getElementById('image-viewer').style.display = 'none';
+    }
  function gotoAbout(val) {
      closeMobileMenu();
         const element = document.querySelector('.about');
@@ -278,7 +303,7 @@
         albumImages = [];
         // console.log(data);
         data.split(' ,').forEach((el) => {
-            const single = el.split('katpakaVinayakar');
+            const single = el.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>');
             albumImages.push(single[1]);
         })
         document.getElementById('bgimg').style.backgroundImage = `url('${albumImages[0]}')`;
@@ -426,15 +451,16 @@
                 // console.log(response.data);
 
                 let tamilN = response.data[0].tamil;
+                // console.log(response.data[0]);
                 notice.push(
-                    tamilN.split('katpakaVinayakar')[1]
+                    tamilN.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1]
                 )
                 let englishN = response.data[0].eng;
                 notice.push(
-                    englishN.split('katpakaVinayakar')[1]
+                    englishN.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1]
                 )
 
-                console.log(notice);
+                // console.log(notice);
                 
                 
 

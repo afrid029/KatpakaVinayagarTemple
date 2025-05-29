@@ -8,6 +8,7 @@
   height: auto;
   cursor: pointer;
   margin-bottom: 2%;
+  gap: 10px;
 }
 
 .images {
@@ -15,13 +16,15 @@
   position: relative;
   width: 100%;
   height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .rightSide {
   position: absolute;
   transform: rotate(-20deg);
   background-image: url("/Assets/Images/vin.jpg");
-  width: 70%;
+  width: 80%;
   height: auto;
   aspect-ratio: 1;
   border-radius: 8px;
@@ -36,7 +39,7 @@
   /* transform: rotate(20deg); */
   left: 25px;
   background-image: url("/Assets/Images/vin2.jpg");
-  width: 70%;
+  width: 80%;
   height: auto;
   aspect-ratio: 1;
   border-radius: 8px;
@@ -60,4 +63,84 @@
 
 .collect-title h5 {
   text-align: center;
+  font-family: "roboto", sans-serif;
+}
+
+@media (min-width: 2800px) {
+  .collect-title h5 {
+    font-size: 1.5rem;
+  }
+
+   .collect {
+    gap: 25px;
+  }
+
+  .rightSide {
+    width: 70%;
+  }
+
+  .leftSide {
+    width: 70%;
+  }
+}
+@media (max-width: 2800px) {
+  .collect-title h5 {
+    font-size: 1.2rem;
+  }
+   .collect {
+    gap: 20px;
+  }
+
+  .rightSide {
+    width: 65%;
+  }
+
+  .leftSide {
+    width: 65%;
+  }
+}
+@media (max-width: 1920px) {
+  .collect-title h5 {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 1440px) {
+  .collect-title h5 {
+    font-size: 0.7rem;
+  }
+   .collect {
+    gap: 15px;
+  }
+}
+@media (max-width: 1280px) {
+  .collect-title h5 {
+    font-size: 0.5rem;
+  }
+}
+@media (max-width: 1024px) {
+  .collect-title h5 {
+    font-size: 0.4rem;
+  }
+
+  .collect {
+    gap: 15px;
+  }
+}
+@media (max-width: 600px) {
+  .collect-title h5 {
+    font-size: 0.5rem;
+  }
+
+  .collect {
+    width: 40%;
+    gap: 10px;
+  }
+
+  .rightSide {
+    width: 65%;
+  }
+
+  .leftSide {
+    width: 65%;
+  }
 }

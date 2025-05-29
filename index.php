@@ -15,10 +15,10 @@
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_circle_left" />
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_circle_right" /> -->
-
+    <link rel="stylesheet" href="/Assets/CSS/alert.css">
     <link rel="stylesheet" href="/Assets/CSS/index.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/Form.css">
-    <link rel="stylesheet" href="/Assets/CSS/alert.css">
+    
     <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
     <link rel="stylesheet" href="/Assets/CSS/model.css">
     <link rel="stylesheet" href="/Assets/CSS/model2.css">
@@ -60,13 +60,28 @@
                 <li onclick="openNoticeModel()">Notice</li>
                 <li><a href="/gallery">Gallery</a></li>
                 <li onclick="gotoAbout()">About</li>
-                <li class="login" onclick="openLogin()">
+
+
+                <?php if(!isset($_COOKIE['user'])) { ?>
+            <li class="login" onclick="openLogin()">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#FFFFFF">
                         <path
                             d="M280-400q-33 0-56.5-23.5T200-480q0-33 23.5-56.5T280-560q33 0 56.5 23.5T360-480q0 33-23.5 56.5T280-400Zm0 160q-100 0-170-70T40-480q0-100 70-170t170-70q67 0 121.5 33t86.5 87h352l120 120-180 180-80-60-80 60-85-60h-47q-32 54-86.5 87T280-240Zm0-80q56 0 98.5-34t56.5-86h125l58 41 82-61 71 55 75-75-40-40H435q-14-52-56.5-86T280-640q-66 0-113 47t-47 113q0 66 47 113t113 47Z" />
                     </svg>
                     Login</li>
+
+            <?php   } else {
+                ?>
+                <li  class="login">
+               <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M192-192v-96l72-72v168h-72Zm126 0v-222l66-66 6 6v282h-72Zm126 0v-228l72 72v156h-72Zm126 0v-186l72-72v258h-72Zm126 0v-312l72-72v384h-72ZM192-378v-102l192-192 144 144 240-240v102L528-426 384-570 192-378Z"/></svg>
+                <a style="color:white;" href="/dashboard" target="_blank">Dashboard</a></li>
+                
+                <?php
+            }?>
+
+
+                
             </ul>
 
             <div class="openMenu">
@@ -84,6 +99,34 @@
 </nav>
 
 <body>
+
+    <?php
+    if (isset($_SESSION['fromAction']) && $_SESSION['fromAction'] === true) { ?>
+
+    <div class="alert-container" id="alertSecond">
+        <div class="alert" id="alertContSecond">
+            <p><?php echo $_SESSION['message'] ?></p>
+        </div>
+    </div>
+
+    <?php
+    if ($_SESSION['status'] === true) {
+        echo "<script>document.getElementById('alertContSecond').style.backgroundColor = '#1D7524';</script>";
+    } else {
+        echo "<script>document.getElementById('alertContSecond').style.backgroundColor = '#E44C4C';</script>";
+    }
+    ?>
+    <script>
+        document.getElementById('alertSecond').style.display = 'flex';
+        setTimeout(() => {
+            document.getElementById('alertSecond').style.display = 'none';
+        }, 5000);
+    </script>
+    <?php
+    }
+    $_SESSION['fromAction'] = false;
+
+?>
     <!-- Mobile Navigations -->
     <div class="mobile-nav">
         <div class="mobile-nav-list">
@@ -122,13 +165,25 @@
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
                 About</div>
-            <div  onclick="openLogin()">
+
+            <?php if(!isset($_COOKIE['user'])) { ?>
+            <div onclick="openLogin()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
                 Login</div>
+
+            <?php   } else {
+                ?>
+                <div>
+               <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M192-192v-96l72-72v168h-72Zm126 0v-222l66-66 6 6v282h-72Zm126 0v-228l72 72v156h-72Zm126 0v-186l72-72v258h-72Zm126 0v-312l72-72v384h-72ZM192-378v-102l192-192 144 144 240-240v102L528-426 384-570 192-378Z"/></svg>
+                <a href="/dashboard">Dashboard</a></div>
+                
+                <?php
+            }?>
+
         </div>
 
     </div>
@@ -144,7 +199,7 @@
     <!-- Live Tv -->
     <div class="livebody">
         <div class="body">
-            
+
             <div class="livePlayer">
                 <?php include('Components/LiveTv.php') ?>
             </div>
@@ -181,7 +236,7 @@
 
                 </div>
                 <div class="img-cover"></div>
-                <!-- <img src="/Assets/Images/vin.jpg" alt=""> -->
+                <!-- <img src="/Assets/Images/vin3.png" alt=""> -->
             </div>
         </div>
     </div>
@@ -226,12 +281,12 @@
     <div class="footer bg-red-900">
         <div>
             <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
-                Productions</a>
+                Productions IT</a>
         </div>
 
     </div>
 
- <?php include('Components/loginModel.php') ?>
+    <?php include('Components/loginModel.php') ?>
 
     <!-- Album Model -->
     <div id="album-model" class="model-overlay2">
@@ -250,12 +305,12 @@
             </div>
 
             <div id="bgimg" class="bgimg">
-                
+
             </div>
         </div>
     </div>
 
-       <!-- Notice Model -->
+    <!-- Notice Model -->
     <div id="notice-model" class="model-overlay2">
         <div class="model-content2">
             <div onclick="closeNoticeModel()" class="close-btn2">Close</div>
@@ -271,22 +326,45 @@
                 </span>
             </div>
             <div id="bgimg3" class="bgimg">
-                
+
             </div>
+        </div>
+    </div>
+    
+        <div id="image-viewer" class="model-overlay">
+        <div class="model-body">
+            <div onclick="closeImageViewer()" class="close-btn">x</div>
+            <div class="model-content">
+                <div class="image-viewer-container">
+                    <div class="image-viewer">
+                        <img id="frontImg" src="" alt="Front Page">
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 
 </body>
 
 <script>
+document.getElementById('bgimg3').addEventListener('click', (e) => {
+        const input = e.target.style.backgroundImage;
+        const path = input.slice(5, -2);
+        document.getElementById('frontImg').setAttribute('src', path)
+        document.getElementById('image-viewer').style.display = 'block'
+    })
 
-     function gotoAbout(val) {
+    function closeImageViewer() {
+        document.getElementById('image-viewer').style.display = 'none';
+    }
+    function gotoAbout(val) {
         closeMobileMenu();
         const element = document.querySelector('.about');
         if (!val) {
             // slideBar(false);
             const rect = element.getBoundingClientRect();
-
             // Scroll the page down by the position of the element plus an additional 100px
             window.scrollTo({
                 top: window.scrollY + rect.top, // Current scroll position + element's top position + 100px
@@ -294,17 +372,14 @@
             });
         } else {
             const rect = element.getBoundingClientRect();
-
             // Scroll the page down by the position of the element plus an additional 100px
             window.scrollTo({
-                top: window.scrollY + rect.top - 200, // Current scroll position + element's top position + 100px
+                top: window.scrollY + rect.top -
+                200, // Current scroll position + element's top position + 100px
                 behavior: 'smooth' // Smooth scrolling
             });
         }
-
     }
-
-    
     document.getElementById("event-details").addEventListener("click", function(event) {
         const cur = event.target.closest('.event');
         const descElement = cur.querySelectorAll('div')[4];
@@ -312,7 +387,7 @@
         if (status) {
             descElement.style.display = "none";
         } else {
-            descElement.style.display = "block";
+            descElement.style.display = "flex";
         }
     })
 
@@ -328,8 +403,8 @@
     const openMenue = document.querySelector('.openMenu');
     const closeMenu = document.querySelector('.closeMenu');
     const mobileNav = document.querySelector('.mobile-nav');
-
     openMenue.addEventListener('click', openMobileMenu)
+
     function openMobileMenu() {
         openMenue.setAttribute('style', 'display: none');
         closeMenu.setAttribute('style', 'display: block');
@@ -338,25 +413,23 @@
     closeMenu.addEventListener('click', closeMobile)
 
     function closeMobile() {
-         openMenue.setAttribute('style', 'display: block');
+        openMenue.setAttribute('style', 'display: block');
         closeMenu.setAttribute('style', 'display: none');
         mobileNav.setAttribute('style', 'display: none');
     }
 
     function closeMobileMenu() {
-        
         mobileNav.setAttribute('style', 'display: none');
     }
-
     let albumImages = [];
     let currentIndex = 0;
     let next = 0
-     const backBtn = document.querySelector('.backbtn');
+    const backBtn = document.querySelector('.backbtn');
     const rightBtn = document.querySelector('.rightBtn');
     const posterImg = document.getElementById('bgimg');
-  
     backBtn.addEventListener('click', goBack);
     rightBtn.addEventListener('click', goNext);
+
     function closeAlbumView() {
         document.getElementById('album-model').style.display = 'none';
         currentIndex = 0;
@@ -369,13 +442,12 @@
         albumImages = [];
         // console.log(data);
         data.split(' ,').forEach((el) => {
-            const single = el.split('katpakaVinayakar');
+            const single = el.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>');
             albumImages.push(single[1]);
         })
         document.getElementById('bgimg').style.backgroundImage = `url('${albumImages[0]}')`;
         document.getElementById('album-model').style.display = 'block';
     }
-   
 
     function goBack() {
         next = -1;
@@ -393,14 +465,13 @@
         if (currentIndex == 0) {
             backBtn.style.display = 'none';
             rightBtn.style.display = 'block';
-        } else if(currentIndex == albumImages.length-1){
+        } else if (currentIndex == albumImages.length - 1) {
             rightBtn.style.display = 'none'
-             backBtn.style.display = 'block';
-        }else {
+            backBtn.style.display = 'block';
+        } else {
             backBtn.style.display = 'block';
             rightBtn.style.display = 'block';
         }
-
         if (next == -1) {
             posterImg.classList.add('moveRightOff');
             posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
@@ -413,9 +484,7 @@
                 posterImg.classList.remove('moveRightIn');
             }, 600);
         } else {
-    
             posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
-          
             posterImg.classList.add('moveleftOff');
             setTimeout(() => {
                 posterImg.classList.remove('moveleftOff');
@@ -426,81 +495,66 @@
             }, 600);
         }
     }
-
     //Notice Handling
     let notice = [];
     let noticeIndex = 0;
     const right = document.getElementById('rightNot');
     const left = document.getElementById('leftNot');
     const noticeImg = document.getElementById('bgimg3');
-
     left.addEventListener('click', updateNotice);
     right.addEventListener('click', updateNotice);
 
     function openNoticeModel() {
         closeMobileMenu();
         document.getElementById('notice-model').style.display = 'block';
-         noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
-         noticeIndex = 1
+        noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
+        noticeIndex = 1
         // updateNotice();
-        
-        
     }
+
     function closeNoticeModel() {
         document.getElementById('notice-model').style.display = 'none';
         noticeIndex = 0;
     }
 
     function updateNotice() {
-        
-        if(noticeIndex == 1) {
-            
+        if (noticeIndex == 1) {
             // console.log('ssddsdfooooooooooo');
-            
             noticeImg.classList.add('moveRightOff');
             // noticeImg.setAttribute('src', notice[currentIndex]);
             noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
             console.log(notice[noticeIndex]);
-            
             // // posterImg.classList.add('moveRightIn');
             // left.setAttribute('style', 'display: block');
             // right.setAttribute('style', 'display: none');
             right.style.display = 'none';
             left.style.display = 'block';
-           
             setTimeout(() => {
                 noticeImg.classList.remove('moveRightOff');
                 noticeImg.classList.add('moveRightIn');
             }, 500);
-             setTimeout(() => {
+            setTimeout(() => {
                 noticeImg.classList.remove('moveRightIn');
             }, 1000);
-
             noticeIndex = 0;
-        
         } else {
-         
-           noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
-           console.log(notice[noticeIndex]);
-           
+            noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
+            console.log(notice[noticeIndex]);
             // right.setAttribute('style', 'display: block');
             right.style.display = 'block';
             left.style.display = 'none';
             // left.setAttribute('style', 'display: none');
             noticeImg.classList.add('moveleftOff');
-              setTimeout(() => {
+            setTimeout(() => {
                 noticeImg.classList.remove('moveleftOff');
                 noticeImg.classList.add('moveLeftIn');
             }, 500);
-
-             setTimeout(() => {
+            setTimeout(() => {
                 noticeImg.classList.remove('moveLeftIn');
             }, 1000);
-               noticeIndex = 1;
-
+            noticeIndex = 1;
         }
     }
-
     //On Load Functions
     function loadEvent() {
         const xhr = new XMLHttpRequest();
@@ -516,7 +570,6 @@
     }
 
     function loadAlbum() {
-        
         const xhr = new XMLHttpRequest();
         xhr.open('GET', '/Controllers/GetTopAlbums.php', true);
         xhr.onload = function() {
@@ -524,6 +577,8 @@
             if (xhr.status == 200 && xhr.readyState == 4) {
                 var response = JSON.parse(xhr.responseText);
                 document.getElementById("gallery-content").innerHTML = response.html;
+            }else {
+                console.log(xhr.status)
             }
         }
         xhr.send();
@@ -531,26 +586,24 @@
 
     function loadNotice() {
         notice = [];
-         const xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open('GET', '/Controllers/GetNotice.php', true);
         xhr.onload = function() {
             if (xhr.status == 200 && xhr.readyState == 4) {
                 var response = JSON.parse(xhr.responseText);
                 // console.log(response.data);
-
-                let tamilN = response.data[0].tamil;
-                notice.push(
-                    tamilN.split('katpakaVinayakar')[1]
-                )
-                let englishN = response.data[0].eng;
-                notice.push(
-                    englishN.split('katpakaVinayakar')[1]
-                )
-
-                console.log(notice);
-                
-                
-
+                if(response.data.length > 0) {
+                    let tamilN = response.data[0].tamil;
+                    notice.push(
+                        tamilN.split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1]
+                    )
+                    let englishN = response.data[0].eng;
+                    notice.push(
+                        englishN.split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1]
+                     )
+                }
+              
+                // console.log(notice);
             }
         }
         xhr.send();

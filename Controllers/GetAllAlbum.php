@@ -19,8 +19,8 @@ $total_records = $row['total'];
 
 $total_received = '';
 
-$query="SELECT ID, event, GROUP_CONCAT(image SEPARATOR ' ,') as images, uploadedDate FROM gallery
-group by ID 
+$query="SELECT ID, MAX(event) as event , GROUP_CONCAT(image SEPARATOR ' ,') as images, MAX(uploadedDate) AS uploadedDate FROM gallery
+group by ID
 Order by uploadedDate desc
 LIMIT $offset, $results_per_page";
 
@@ -33,9 +33,9 @@ if (mysqli_num_rows($result) > 0) {
          $event = $row['event'];
         $images = $row['images'];
         $img1 = explode(" ,", $images)[0];
-        $img1 = explode('katpakaVinayakar', $img1)[1];
+        $img1 = explode($_SERVER['DOCUMENT_ROOT'] , $img1)[1];
         $img2 = explode(" ,", $images)[1];
-         $img2 = explode('katpakaVinayakar', $img2)[1];
+         $img2 = explode($_SERVER['DOCUMENT_ROOT'] , $img2)[1];
 
         ob_start();
         include(__DIR__ . '/../Components/collection.php');

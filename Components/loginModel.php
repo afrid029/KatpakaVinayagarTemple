@@ -22,10 +22,10 @@
                                     <input type="password" name="password" id="password" required />
                                 </div>
 
-                                <button type="submit" id="submit" name="submit"  class="upload"> Login
+                                <button type="submit" id="login-submit" name="submit"  class="upload"> Login
                                 </button>
 
-                                <button style="display: none;" id="submiting" disabled="true" class="upload"> logging
+                                <button style="display: none;" id="login-submiting" disabled="true" class="upload"> logging
                                     in...
                                 </button>
                             </div>
@@ -36,5 +36,15 @@
 
         </div>
     </div>
+
+    <script>
+        function submitLoginform() {
+        let button = document.getElementById('login-submit');
+        let button2 = document.getElementById('login-submiting');
+        button.style.display = 'none';
+        button2.style.display = 'block';
+        return true;
+    }
+    </script>
 
     

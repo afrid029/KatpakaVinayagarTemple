@@ -66,3 +66,29 @@
     font-size: 1.2rem;
   }
 }
+
+@media (max-width: 1920px) {
+  .close-btn2 {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 1440px) {
+  .close-btn2 {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 1024px) {
+  .close-btn2 {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 900px) {
+  .close-btn2 {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 600px) {
+  .close-btn2 {
+    font-size: 0.7rem;
+  }
+}
