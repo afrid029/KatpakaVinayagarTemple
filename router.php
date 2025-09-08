@@ -1,3 +1,4 @@
+
 <?php
 // Get the current URL path
 $request = $_SERVER['REQUEST_URI'];
@@ -33,6 +34,9 @@ switch ($request) {
         break;
     case '/gallery':
         require 'gallery.php';
+        break;
+    case '/notice':
+        require 'notice.php';
         break;
     default:
         http_response_code(404); // Not Found

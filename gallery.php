@@ -3,9 +3,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="Assets/Images/R1.PNG" />
-    <title>Calendar | கற்பக விநாயகர் தேவஸ்தானம்</title>
+    <title>Gallery | கற்பக விநாயகர் தேவஸ்தானம்</title>
     <meta charset="UTF-8">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Mukta+Malar:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
@@ -14,6 +13,32 @@
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_circle_left" />
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_circle_right" /> -->
+
+<script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+                screens: {
+                    xs: "480px", // extra small devices
+                    sm: "640px", // small devices
+                    md: "768px", // medium devices
+                    lg: "1024px", // large devices
+                    xl: "1280px", // extra large
+                    "2xl": "1536px" // double extra large
+                }
+            }
+        }
+    </script>
+     <style>
+        .font-english {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .font-tamil {
+            font-family: 'Anek Tamil', sans-serif;
+        }
+    </style>
 
     <link rel="stylesheet" href="/Assets/CSS/index.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/nav.css"> -->
@@ -53,7 +78,7 @@
             <ul class="nav-list">
                 <li ><a href="/">Home</a></li>
                 <li ><a href="/calendar">Calendar</a></li>
-                <li onclick="openNoticeModel()">Notice</li>
+                <li ><a href="/notice">Notice</a></li>
                 <li class="active">Gallery</li>
                 <li onclick="gotoAbout()">About</li>
 
@@ -91,13 +116,13 @@
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
                 <a href="/calendar">Calendar</a></div>
-            <div onclick="openNoticeModel()">
+            <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
-                Notice</div>
+                <a href="/notice">Notice</a></div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
@@ -182,31 +207,10 @@
         </div>
     </div>
 
-     <!-- AboutUs -->
-    <div class="about">
-        <div class="about-title">
-            <h3>About Us</h3>
-            <hr>
-        </div>
-        <div class="about-content">
-            <h4>
-                The Sri Katpaga Vinayagar Temple is located in Brampton (Mississauga), Ontario, Canada. Sri Katpaga
-                Vinayagar is the main deity. The other deities in the temple include Sri Konanathar, Sri Mathumaiyamman,
-                Sri Aancha Neyar Swami, Sri Nagapooshani Ambal, Sri Devi, Sri Mahavishnu(Vishnu), Sri Poomi Devi, Hari
-                Hara Buthra Iyanar, Tadsanamoorthy, Sri Raja Rajeswary, Sri Valli, Sri Subramaniyar (Muruan), Sri
-                Theivanai, Durkka, Nadarajar (Load Siva), Sri Aiyappa Swami, Navagrahas { 9 Planets – Sun(Surya),
-                Moon(Chandra), Mars(Mangala), Mercury(Budha), Jupiter(Brihaspathi), Venus(Sukra), Saturn(Sani), Rahu and
-                Ketu } and the Sri Kaala Vairavar.
-            </h4>
-        </div>
-    </div>
-       <div class="footer bg-red-900">
-        <div>
-            <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
-                Productions IT</a>
-        </div>
+    <!-- AboutUs -->
+     <?php include('Components/aboutus.php') ?>
 
-    </div>
+     <!-- Image Viewer -->
     
      <div id="image-viewer" class="model-overlay">
         <div class="model-body">

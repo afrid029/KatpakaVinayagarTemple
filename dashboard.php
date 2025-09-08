@@ -6,26 +6,42 @@
     <link rel="icon" type="image/png" href="Assets/Images/R1.PNG" />
     <title>கற்பக விநாயகர் தேவஸ்தானம்</title>
     <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+ 
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Mukta+Malar:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_circle_left" />
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_circle_right" /> -->
-
-    <!-- <link rel="stylesheet" href="/Assets/CSS/index.css"> -->
-    <!-- <link rel="stylesheet" href="/Assets/CSS/Form.css">
-    <link rel="stylesheet" href="/Assets/CSS/alert.css"> !-->
-    <!-- <link rel="stylesheet" href="/Assets/CSS/pagination.css"> -->
+<script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+                screens: {
+                    xs: "480px", // extra small devices
+                    sm: "640px", // small devices
+                    md: "768px", // medium devices
+                    lg: "1024px", // large devices
+                    xl: "1280px", // extra large
+                    "2xl": "1536px" // double extra large
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="/Assets/CSS/model.css">
     <link rel="stylesheet" href="/Assets/CSS/dashboard.css">
     <link rel="stylesheet" href="/Assets/CSS/login.css">
     <link rel="stylesheet" href="/Assets/CSS/alert.css">
     <link rel="stylesheet" href="/Assets/CSS/DeleteModel.css">
+    <style>
+        .font-english {
+            font-family: 'Roboto', sans-serif;
+        }
 
+        .font-tamil {
+            font-family: 'Anek Tamil', sans-serif;
+        }
+    </style>
 </head>
 <nav class="bg-red-900">
     <div class="nav-bg"></div>
@@ -52,8 +68,8 @@
 <body>
 
 
-<?php
-    
+    <?php
+
     if (isset($_SESSION['fromAction']) && $_SESSION['fromAction'] === true) { ?>
 
 
@@ -72,9 +88,9 @@
         ?>
         <script>
             document.getElementById('alertSecond').style.display = 'flex';
-            
+
             console.log('Alert triggerdd');
-        
+
 
             setTimeout(() => {
                 document.getElementById('alertSecond').style.display = 'none';
@@ -105,9 +121,8 @@
         $passedArray = unserialize($decryptedData);
         // $result = mysqli_query($db, $query);
 
-            $_SESSION['email'] = $passedArray['email'];
-            $_SESSION['role'] = $passedArray['role'];
-       
+        $_SESSION['email'] = $passedArray['email'];
+        $_SESSION['isSuperAdmin'] = $passedArray['isAdmin'];
     }
 
     ?>
@@ -115,14 +130,30 @@
     <div class="add-buttons">
         <div onclick="handleModel('event-model', true)" class="createBtn">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-                <path d="M427-427H180.78v-106H427v-246.22h106V-533h246.22v106H533v246.22H427V-427Z" /></svg> &nbsp;
+                <path d="M427-427H180.78v-106H427v-246.22h106V-533h246.22v106H533v246.22H427V-427Z" />
+            </svg> &nbsp;
             Event
         </div>
         <div onclick="addListener()" class="createBtn">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-                <path d="M427-427H180.78v-106H427v-246.22h106V-533h246.22v106H533v246.22H427V-427Z" /></svg> &nbsp;
+                <path d="M427-427H180.78v-106H427v-246.22h106V-533h246.22v106H533v246.22H427V-427Z" />
+            </svg> &nbsp;
             Album
         </div>
+
+        <?php 
+            if($_SESSION['isSuperAdmin'] == true){
+                ?>
+                <div onclick="handleModel('user-model', true)" class="createBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+                                <path d="M427-427H180.78v-106H427v-246.22h106V-533h246.22v106H533v246.22H427V-427Z" />
+                            </svg> &nbsp;
+                            Admin
+                </div>
+                <?php
+            }
+        ?>
+        
 
     </div>
     <!-- Alert -->
@@ -245,6 +276,102 @@
                 </div>
 
             </form>
+        </div>
+    </div>
+
+     <!-- Add Admin -->
+    <div id="user-model" class="model-overlay">
+        <div class="model-body">
+            <div class="model-content">
+                <div class="login-form">
+                    <div onclick="handleModel('user-model', false)" class="close-btn">x</div>
+                    <div class="login-title">
+                        <h4>Create User</h4>
+                        <hr>
+                    </div>
+                    <div class="login-content">
+                        <form id="add-user-form" method="post" oninput="validateUserForm()">
+                            <div class="Form">
+                                <div class="FormRow">
+                                    <label htmlFor="email">email</label>
+                                    <input type="email" name="email" id="email" required />
+                                </div>
+                                <div class="FormRow">
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password" name="password" id="password" required />
+                                </div>
+                                <div class="FormRow">
+                                    <label htmlFor="repassword">Re Password</label>
+                                    <input type="password" name="repassword" id="repassword" required />
+                                </div>
+                                
+
+                                <button type="submit" id="user-submit" name="submit" disabled="true" class="upload">
+                                    Create
+                                </button>
+
+                                <button style="display: none;" id="user-submiting" disabled="true" class="upload">
+                                    Creating...
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Edit User -->
+    <div id="edit-user-model" class="model-overlay">
+        <div class="model-body">
+            <div class="model-content">
+                <div class="login-form">
+                    <div onclick="handleModel('edit-user-model', false)" class="close-btn">x</div>
+                    <div class="login-title">
+                        <h4>Edit Admin</h4>
+                        <hr>
+                    </div>
+                    <div class="login-content">
+                        <form id="edit-user-form" method="post" oninput="validateEditUserForm()">
+                            <input type="number" name="edit-userid" id="edit-userid" hidden>
+                            <div class="Form">
+                                <div class="FormRow">
+                                    <label htmlFor="edit-email">Email</label>
+                                    <input type="email" name="edit-email" id="edit-email" required />
+                                </div>
+                                <div class="FormRow">
+                                    <label htmlFor="edit-password">Password</label>
+                                    <input type="password" name="edit-password" id="edit-password"  />
+                                </div>
+                                <div class="FormRow">
+                                    <label htmlFor="edit-repassword">Re Password</label>
+                                    <input type="password" name="edit-repassword" id="edit-repassword"  />
+                                </div>
+                                
+                                <div class="">
+                                    <label for="form-active">Active</label>
+                                    <input type="radio" name="status" id="form-active">
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <label for="form-deactive">Deactive</label>
+                                    <input type="radio" name="status" id="form-deactive">
+                                </div>
+
+                                <button type="submit" id="edit-user-submit" name="submit" disabled="true"
+                                    class="upload">
+                                    Update
+                                </button>
+
+                                <button style="display: none;" id="edit-user-submiting" disabled="true" class="upload">
+                                    Updating...
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -385,12 +512,12 @@
         </div>
     </div>
 
-      <!-- Edit Gallery NOT IMPLEMENTED -->
+    <!-- Edit Gallery NOT IMPLEMENTED -->
     <div id="edit-gallery-model" class="model-overlay">
         <div class="model-body">
             <div class="model-content">
                 <div class="login-form">
-                    <div onclick="removeEditListener()" class="close-btn">x</div>
+                    <div onclick="handleModel('edit-gallery-model', false);" class="close-btn">x</div>
                     <div class="login-title">
                         <h4>Edit Album</h4>
                         <hr>
@@ -526,7 +653,7 @@
         </div>
     </div>
 
-     <!-- Delete Gallery -->
+    <!-- Delete Gallery -->
     <div class="del-modal-overlay" id="deleteAlbumModel">
         <div class="del-modal-content" onclick="event.stopPropagation()">
 
@@ -546,10 +673,30 @@
         </div>
     </div>
 
+    <!-- View Admins -->
+     <?php 
+        if($_SESSION['isSuperAdmin'] == true) {
+            ?>
+                <div class="event-viewer">
+        <div class="event-viewer-title">
+            <h2 class="event-ttl">Admins</h2>
+            <hr>
+        </div>
+        <div id="loading-spinner-admin" class="loading-spinner"></div>
+        <div id="admin-viewer-content" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        
+        </div>
+
+    </div>
+            <?php
+        }
+
+    ?>
+
     <!-- View Events -->
     <div class="event-viewer">
         <div class="event-viewer-title">
-            <h2 class="event-ttl" >Events</h2>
+            <h2 class="event-ttl">Events</h2>
             <hr>
         </div>
         <div id="loading-spinner" class="loading-spinner"></div>
@@ -813,32 +960,76 @@
 
     <!-- Add Notice -->
     <!-- Tamil -->
-    <div class="form-bg">
-        <form id="add-notice-tamil" method="post">
-            <div class="Form">
-                <div class="FormRow">
-                    <label style="font-weight: 600; color: brown" for="tamnotice">Upload Notice (Tamil)</label>
-                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg" name="tamnotice"
+    <div class="bg-white !my-2 !py-6 rounded-lg w-full flex flex-col !px-3 md:!px-10">
+        <h2 class="text-base md:text-mg lg:text-lg xl:text-xl !pl-3 text-[#a52a2a] font-semibold">Upload Notice (Tamil)</h2>
+        <hr style="margin-top: 2%; margin-bottom: 2%">
+        <form class="w-full flex flex-col gap-4 !px-2" id="add-notice-tamil" method="post">
+            <div class="flex w-full !pt-2 shrink-1 gap-4 items-center flex-wrap justify-start">
+                <input class="w-full md:w-[80%] border-0 border-b border-[#9A9999] focus:border-b-2 focus:border-[#9A9999] focus:ring-0 focus:outline-none" name="noticeTitle" type="text" placeholder="Notice Title" required>
+                <div class="flex gap-2 shrink  ">
+                    <input type="file" class="border-2 shrink min-w-0 w-[50%] lg:w-full border-[#F1F1F1] border-solid rounded-md !p-2" accept="image/jpeg, image/png, image/gif, image/jpg" name="tamnotice"
                         id="tamnotice" required />
-
-                    <button type="submit" id="tamil-notice" class="upload">Upload</button>
+                    <button type="submit" id="tamil-notice" class="bg-[#f9b44d] disabled:bg-[#CFC39F] rounded-lg cursor-pointer font-semibold shrink-0 !p-2">Upload</button>
                 </div>
             </div>
         </form>
+
+        <div id="loading-spinner3" class="loading-spinner"></div>
+        <div id="tamil-notices" class="flex flex-col w-full md:w-[85%] gap-4 !py-6">
+
+        </div>
+
+
     </div>
     <!-- English -->
-    <div class="form-bg">
-        <form id="add-notice-english" method="post">
-            <div class="Form">
-                <div class="FormRow">
-                    <label style="font-weight: 600; color: brown" for="engnotice">Upload Notice (English)</label>
-                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg" name="engnotice"
+    <div class="bg-white !my-2 !py-6 rounded-lg w-full flex flex-col !px-3 md:!px-10">
+        <h2 class="text-base md:text-mg lg:text-lg xl:text-xl !pl-3 text-[#a52a2a] font-semibold">Upload Notice (English)</h2>
+        <hr style="margin-top: 2%; margin-bottom: 2%">
+        <form class="w-full flex flex-col gap-4 !px-2" id="add-notice-english" method="post">
+            <div class="flex w-full !pt-2 shrink-1 gap-4 items-center flex-wrap justify-start">
+                <input class="w-full md:w-[80%] border-0 border-b border-[#9A9999] focus:border-b-2 focus:border-[#9A9999] focus:ring-0 focus:outline-none" name="noticeTitle" type="text" placeholder="Notice Title" required>
+                <div class="flex gap-2 shrink  ">
+                    <input type="file" class="border-2 shrink min-w-0 w-[50%] lg:w-full border-[#F1F1F1] border-solid rounded-md !p-2" accept="image/jpeg, image/png, image/gif, image/jpg" name="engnotice"
                         id="engnotice" required />
-
-                    <button type="submit" id="english-notice" class="upload">Upload</button>
+                    <button type="submit" id="english-notice" class="bg-[#f9b44d] disabled:bg-[#CFC39F] rounded-lg cursor-pointer font-semibold shrink-0 !p-2">Upload</button>
                 </div>
             </div>
         </form>
+
+        <div id="loading-spinner4" class="loading-spinner"></div>
+        <div id="english-notices" class="flex flex-col w-full md:w-[85%] gap-4 !py-6">
+
+        </div>
+
+
+    </div>
+
+    <!-- View Image -->
+    <div id="image-viewer" class=" hidden fixed top-0 left-0 w-full h-full bg-white/40 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[9.6px]">
+        <span onclick="closeImageViewer()" class="cursor-pointer top-2 right-2 fixed w-8 aspect-square flex items-center justify-center rounded-full bg-black text-white font-english">X</span>
+
+        <div id="noticeImg" class="bg-contain bg-contain bg-no-repeat bg-center w-full h-full"></div>   
+
+    </div>
+
+    <!-- Delete Notice -->
+    <div class="del-modal-overlay" id="deleteNoticeModel">
+        <div class="del-modal-content" onclick="event.stopPropagation()">
+
+            <form id="delete-notice-form" method="post" class="del-form">
+                <input type="text" hidden name='ID' id='del-notice-id'>
+                <div class="delMsg">
+                    <h4>Do you want to delete this Notice ?</h4>
+                </div>
+                <div class="option-btn ">
+                    <button onclick="handleModel('deleteNoticeModel', false)" class="opt no" type="button">No</button>
+                    <button name="del-submit" class="opt yes" id="del-notice-submit" type="submit">Yes</button>
+                    <button style="display: none;" id="del-notice-submiting" disabled="true" class="opt yes"> Yes
+                    </button>
+                </div>
+
+            </form>
+        </div>
     </div>
 
 </body>
@@ -991,6 +1182,151 @@
         }
         xhr.send(formData);
     })
+
+
+
+     // Add User
+    function validateUserForm() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const repassword = document.getElementById("repassword").value;
+        const submit = document.getElementById("user-submit");
+        // const submiting = document.getElementById("event-submiting");
+        if (email && password && password == repassword) {
+            submit.disabled = false;
+        } else {
+            submit.disabled = true;
+        }
+    }
+    document.getElementById("add-user-form").addEventListener("submit", function(event) {
+        const submit = document.getElementById("user-submit");
+        const submiting = document.getElementById("user-submiting");
+        submit.style.display = "none";
+        submiting.style.display = "block";
+        event.preventDefault(); // Prevent the default form submission
+        const form = document.getElementById("add-user-form");
+        const formData = new FormData();
+        formData.append('email', document.getElementById("email").value);
+        formData.append('password', document.getElementById("password").value);
+        formData.append('submit', true);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "Controllers/AddUser.php", true); // Adjust the URL to your PHP script
+        xhr.onload = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status) {
+                    alertRise(true, response.message)
+                    handleModel('user-model', false);
+                    form.reset();
+                    validateUserForm();
+                    loadUsers();
+                    // navigate(1);
+                } else {
+                    alertRise(false, response.message)
+                }
+            } else {
+                console.log("Error in XMLHttpRequest ", xhr.readyState);
+            }
+            submit.style.display = "block";
+            submiting.style.display = "none";
+        }
+        xhr.send(formData);
+    })
+
+
+    //Edit User
+    function editUser(id) {
+         document.getElementById('edit-userid').value = '';
+         document.getElementById('edit-email').value = '';
+        document.getElementById('edit-password').value = '';
+        document.getElementById('edit-repassword').value = '';
+        document.getElementById('form-active').checked = false;
+        document.getElementById('form-deactive').checked = false
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetUser.php?id=' + id, true);
+        document.getElementById('edit-user-model').style.display = 'block';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response.data)
+                 document.getElementById('edit-userid').value = response.data[0].id;
+                 document.getElementById('edit-email').value  = response.data[0].email;
+                if(response.data[0].isActive == true) {
+                    document.getElementById('form-active').checked = true;
+                }else {
+                    document.getElementById('form-deactive').checked = true;
+                }
+
+                validateEditUserForm();
+            }
+        };
+        xhr.send();
+
+    }
+
+    function validateEditUserForm() {
+        const email = document.getElementById("edit-email").value;
+        const password = document.getElementById("edit-password").value;
+        const repassword = document.getElementById("edit-repassword").value;
+        const submit = document.getElementById("edit-user-submit");
+        // const submiting = document.getElementById("event-submiting");
+        if (email) {
+            if (password.length > 0 || repassword.length > 0) {
+                if(password == repassword){
+
+                    submit.disabled = false;
+                } else {
+                    submit.disabled = true;
+                }
+            } else {
+                submit.disabled = false;
+            }
+        } else {
+            submit.disabled = true;
+        }
+    }
+    document.getElementById("edit-user-form").addEventListener("submit", function(event) {
+        const submit = document.getElementById("edit-user-submit");
+        const submiting = document.getElementById("edit-user-submiting");
+        submit.style.display = "none";
+        submiting.style.display = "block";
+        event.preventDefault(); // Prevent the default form submission
+        const form = document.getElementById("edit-user-form");
+        const formData = new FormData; // Create a FormData object from the form
+
+        const userid = document.getElementById('edit-userid').value;
+        const email = document.getElementById('edit-email').value;
+        const password = document.getElementById('edit-password').value;
+        const status = document.getElementById('form-active').checked ? true : false;
+        formData.append('userid', userid);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('active', status);
+        formData.append('edit-submit', true)
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "Controllers/AddUser.php", true); // Adjust the URL to your PHP script
+        xhr.onload = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status) {
+                    alertRise(true, response.message)
+                    handleModel('edit-user-model', false);
+                    form.reset();
+                    validateEditUserForm();
+                    loadUsers();
+                    // navigate(1);
+                } else {
+                    alertRise(false, response.message)
+                }   
+            } else {
+                console.log("Error in XMLHttpRequest ", xhr.readyState);
+            }
+            submit.style.display = "block";
+            submiting.style.display = "none";
+        }
+        xhr.send(formData); 
+    })
+
     //Add Album
     function addListener() {
         document.getElementById('select-image').addEventListener('change', PreviewImages);
@@ -1007,8 +1343,7 @@
         const selectedImage = document.getElementById('select-image').value;
         let button = document.getElementById('album-submit');
         //console.log(selectedImage);
-        if (album && allFiles.length > 0) {
-            console.log("true");
+        if (album && allFiles.length > 1) {
             button.disabled = false;
         } else {
             console.log("false");
@@ -1059,7 +1394,7 @@
         // console.log(data.images.split(" ,"));
         document.getElementById('edit-album').value = data.event;
         document.getElementById('album-id').value = data.ID;
-        handleModel('edit-gallery-model', true); 
+        handleModel('edit-gallery-model', true);
     }
 
     function addEditListener() {
@@ -1098,7 +1433,7 @@
         // allEditFiles.forEach(file => {
         //     formData.append('image[]', file);
         // });
-       
+
         formData.append('edit-submit', true);
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "Controllers/AddAlbum.php", true);
@@ -1194,8 +1529,10 @@
         event.preventDefault();
         const submit = document.getElementById("tamil-notice");
         submit.disabled = true;
+        submit.innerText = "Uploading...";
         const form = document.getElementById("add-notice-tamil");
         const formData = new FormData(form);
+        formData.append('lang', 't')
         formData.append('tamilsubmit', true);
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "Controllers/AddNotice.php", true);
@@ -1207,10 +1544,12 @@
                     //handleModel('notice-model', false)
                     form.reset();
                     //validateNoticeForm();
+                    loadNotices();
                 } else {
                     alertRise(false, response.message);
                 }
                 submit.disabled = false;
+                submit.innerText = "Upload";
             } else {
                 console.log("Error in XMLHttpRequest ", xhr.readyState);
             }
@@ -1221,8 +1560,10 @@
         event.preventDefault();
         const submit = document.getElementById("english-notice");
         submit.disabled = true;
+        submit.innerText = "Uploading...";
         const form = document.getElementById("add-notice-english");
         const formData = new FormData(form);
+        formData.append('lang', 'e')
         formData.append('englishsubmit', true);
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "Controllers/AddNotice.php", true);
@@ -1234,16 +1575,78 @@
                     //handleModel('notice-model', false)
                     form.reset();
                     //validateNoticeForm();
+                    loadNotices();
                 } else {
                     alertRise(false, response.message);
                 }
                 submit.disabled = false;
+                submit.innerText = "Upload";
             } else {
                 console.log("Error in XMLHttpRequest ", xhr.readyState);
             }
         }
         xhr.send(formData);
     })
+    //View Notice
+    function viewNotice(id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetNoticeImage.php?id=' + id, true);
+        document.getElementById('image-viewer').style.display = 'block';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                const image = response.data[0].image.split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1];
+                // document.getElementById('noticeImg').src =image;
+                document.getElementById('noticeImg').style.backgroundImage = 'url(' + image + ')';
+
+
+
+            }
+        };
+        xhr.send();
+    }
+
+    //Delete Notice
+    function deleteNotice(id) {
+         document.getElementById('del-notice-id').value = id;
+        handleModel('deleteNoticeModel', true)
+    }
+     document.getElementById('delete-notice-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const submit = document.getElementById('del-notice-submit');
+        const submiting = document.getElementById('del-notice-submiting');
+        submit.style.display = 'none';
+        submiting.style.display = 'block';
+        // const id =  document.getElementById('del-event-id').value;
+        const form = document.getElementById('delete-notice-form');
+        const formData = new FormData(form);
+        formData.append('del-submit', true);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Controllers/AddNotice.php', true);
+        xhr.onload = function() {
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                var response = JSON.parse(xhr.responseText);
+                if (xhr.status) {
+                    alertRise(true, response.message);
+                    handleModel('deleteNoticeModel', false);
+                    loadNotices();
+                } else {
+                    alertRise(false, response.message);
+                }
+            } else {
+                console.log('XHR Error', xhr.status);
+            }
+            submit.style.display = 'block';
+            submiting.style.display = 'none';
+        }
+        xhr.send(formData);
+    })
+
+    //Close Notice Viewer
+    function closeImageViewer() {
+        document.getElementById('image-viewer').style.display = 'none';
+    }
+
     //ON load handles.
     function loadEvent() {
         var xhr = new XMLHttpRequest();
@@ -1296,10 +1699,54 @@
         };
         xhr.send();
     }
+
+    function loadNotices() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetAllNotices.php', true);
+        document.getElementById('loading-spinner3').style.display = 'block';
+        document.getElementById('loading-spinner4').style.display = 'block';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('loading-spinner3').style.display = 'none';
+                document.getElementById('loading-spinner4').style.display = 'none';
+                // document.getElementById('onrowload').style.display = 'none';
+                // onload.classList.remove('onrowload');
+                var response = JSON.parse(xhr.responseText);
+                const tamilNotices = document.getElementById('tamil-notices');
+                const englishNotices = document.getElementById('english-notices');
+                tamilNotices.innerHTML = response.tamil;
+                englishNotices.innerHTML = response.english;
+            }
+        };
+        xhr.send();
+    }
+
+    function loadUsers() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/Controllers/GetAllUsers.php', true);
+        document.getElementById('loading-spinner-admin').style.display = 'block';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('loading-spinner-admin').style.display = 'none';
+                // document.getElementById('onrowload').style.display = 'none';
+                // onload.classList.remove('onrowload');
+                var response = JSON.parse(xhr.responseText);
+                const users = document.getElementById('admin-viewer-content');
+                users.innerHTML = response.html;
+            }
+        };
+        xhr.send();
+    }
     // Load the first page initially
     window.onload = function() {
         loadEvent();
         loadAlbum(1);
+        loadNotices();
+        <?php
+            if($_SESSION['isSuperAdmin'] == true) {
+                echo "loadUsers();";
+            }
+        ?>
     };
     //Alert Raise
     function alertRise(status, message) {

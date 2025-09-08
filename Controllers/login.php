@@ -12,13 +12,12 @@ if(isset($_POST['submit'])){
 
     if(mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
-
-       
-            if($row['password'] === $password) {
+        if($row['isActive'] == true) {
+              if(password_verify($password, $row['password'])) {
 
                 $data = [
                     'email' => $row['email'],
-                    'role' => 'admin'
+                    'isAdmin' => $row['isAdmin']
                 ];
     
                 $iv = openssl_random_pseudo_bytes(16);  // AES block size is 16 bytes
@@ -52,12 +51,21 @@ if(isset($_POST['submit'])){
                 exit();
             }
         
+        } else {
+               $_SESSION['fromAction'] = true;
+                $_SESSION['message'] = 'User Locked';
+                $_SESSION['status'] = false;
+                mysqli_close($db);
+                header('Location: /');
+                exit();
+        }
+          
         
 
 
     }else {
         $_SESSION['fromAction'] = true;
-        $_SESSION['message'] = 'Email not found!';
+        $_SESSION['message'] = 'User not found!';
         $_SESSION['status'] = false;
         mysqli_close($db);
         header('Location: /');

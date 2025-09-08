@@ -12,17 +12,37 @@
         href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Mukta+Malar:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_circle_left" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+                screens: {
+                    xs: "480px", // extra small devices
+                    sm: "640px", // small devices
+                    md: "768px", // medium devices
+                    lg: "1024px", // large devices
+                    xl: "1280px", // extra large
+                    "2xl": "1536px" // double extra large
+                }
+            }
+        }
+    </script>
+    <style>
+        .font-english {
+            font-family: 'Roboto', sans-serif;
+        }
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_circle_right" /> -->
-
-   
+        .font-tamil {
+            font-family: 'Anek Tamil', sans-serif;
+        }
+    </style>
     <link rel="stylesheet" href="/Assets/CSS/calendar.css">
     <link rel="stylesheet" href="/Assets/CSS/nav.css">
-     <link rel="stylesheet" href="/Assets/CSS/index.css">
+    <link rel="stylesheet" href="/Assets/CSS/index.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/alert.css">
     <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
-     <link rel="stylesheet" href="/Assets/CSS/model.css"> 
+    <link rel="stylesheet" href="/Assets/CSS/model.css">
     <link rel="stylesheet" href="/Assets/CSS/model3.css">
     <!-- <link rel="stylesheet" href="/Assets/CSS/login.css"> -->
     <!-- <link rel="stylesheet" href="Assets/CSS/eventTile.css"> -->
@@ -54,9 +74,9 @@
             </div>
 
             <ul class="nav-list">
-                 <li ><a href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li class="active">Calendar</li>
-                <li onclick="openNoticeModel()">Notice</li>
+                <li><a href="/notice">Notice</a></li>
                 <li><a href="/gallery">Gallery</a></li>
                 <li onclick="gotoAbout()">About</li>
 
@@ -87,36 +107,41 @@
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
-                <a href="/">Home</a></div>
+                <a href="/">Home</a>
+            </div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
-                Calendar</div>
-            <div onclick="openNoticeModel()">
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                    fill="#F19E39">
-                    <path
-                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                </svg>
-                Notice</div>
+                Calendar
+            </div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
-                <a href="/gallery">Gallery</a></div>
+                <a href="/notice">Notice</a>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
+                    fill="#F19E39">
+                    <path
+                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
+                </svg>
+                <a href="/gallery">Gallery</a>
+            </div>
             <div onclick="gotoAbout()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
                     fill="#F19E39">
                     <path
                         d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
                 </svg>
-                About</div>
-        
+                About
+            </div>
+
         </div>
 
     </div>
@@ -137,10 +162,10 @@
                     </label>
                     <small>E</small>
                 </div>
-                
-               
+
+
             </div>
-             <hr>
+            <hr>
             <div class="calendar">
                 <div class="btn backbtn">
                     <span class="material-symbols-outlined">
@@ -172,33 +197,9 @@
     </div>
 
     <!-- AboutUs -->
-    <div class="about">
-        <div class="about-title">
-            <h3>About Us</h3>
-            <hr>
-        </div>
-        <div class="about-content">
-            <h4>
-                The Sri Katpaga Vinayagar Temple is located in Brampton (Mississauga), Ontario, Canada. Sri Katpaga
-                Vinayagar is the main deity. The other deities in the temple include Sri Konanathar, Sri Mathumaiyamman,
-                Sri Aancha Neyar Swami, Sri Nagapooshani Ambal, Sri Devi, Sri Mahavishnu(Vishnu), Sri Poomi Devi, Hari
-                Hara Buthra Iyanar, Tadsanamoorthy, Sri Raja Rajeswary, Sri Valli, Sri Subramaniyar (Muruan), Sri
-                Theivanai, Durkka, Nadarajar (Load Siva), Sri Aiyappa Swami, Navagrahas { 9 Planets – Sun(Surya),
-                Moon(Chandra), Mars(Mangala), Mercury(Budha), Jupiter(Brihaspathi), Venus(Sukra), Saturn(Sani), Rahu and
-                Ketu } and the Sri Kaala Vairavar.
-            </h4>
-        </div>
-    </div>
+     <?php include('Components/aboutus.php') ?>
 
-       <div class="footer bg-red-900">
-        <div>
-            <span class="text-gray-200">Designed By : </span> <a href="https://masspro.ca/en/" target="_blank">Mass
-                Productions IT</a>
-        </div>
-
-    </div>
-     
-       <!-- Notice Model -->
+    <!-- Notice Model -->
     <div id="notice-model" class="model-overlay2">
         <div class="model-content2">
             <div onclick="closeNoticeModel()" class="close-btn2">Close</div>
@@ -214,12 +215,12 @@
                 </span>
             </div>
             <div id="bgimg3" class="bgimgx">
-                
+
             </div>
         </div>
     </div>
-    
-     <div id="image-viewer" class="model-overlay">
+
+    <div id="image-viewer" class="model-overlay">
         <div class="model-body">
             <div onclick="closeImageViewer()" class="close-btn">x</div>
             <div class="model-content">
@@ -239,119 +240,118 @@
 </html>
 
 <script>
+    let startX, startY, endX, endY;
+    let isSwipe = false;
 
-let startX, startY, endX, endY;
-  let isSwipe = false;
+    const swipeArea = document.getElementById("bgimg");
 
-  const swipeArea = document.getElementById("bgimg");
+    // Handle touch start
+    swipeArea.addEventListener("touchstart", (e) => {
+        isSwipe = false;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
 
-  // Handle touch start
-  swipeArea.addEventListener("touchstart", (e) => {
-    isSwipe = false;
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-  });
+    // Handle touch move
+    swipeArea.addEventListener("touchmove", (e) => {
+        const moveX = e.touches[0].clientX;
+        const moveY = e.touches[0].clientY;
+        const dx = moveX - startX;
+        const dy = moveY - startY;
 
-  // Handle touch move
-  swipeArea.addEventListener("touchmove", (e) => {
-    const moveX = e.touches[0].clientX;
-    const moveY = e.touches[0].clientY;
-    const dx = moveX - startX;
-    const dy = moveY - startY;
+        // If movement is more than a few pixels, treat as swipe
+        if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+            isSwipe = true;
+        }
+    });
 
-    // If movement is more than a few pixels, treat as swipe
-    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
-      isSwipe = true;
-    }
-  });
+    // Handle touch end
+    swipeArea.addEventListener("touchend", (e) => {
+        if (!isSwipe) return; // Don't trigger swipe if it's a tap
 
-  // Handle touch end
-  swipeArea.addEventListener("touchend", (e) => {
-    if (!isSwipe) return; // Don't trigger swipe if it's a tap
+        endX = e.changedTouches[0].clientX;
+        endY = e.changedTouches[0].clientY;
 
-    endX = e.changedTouches[0].clientX;
-    endY = e.changedTouches[0].clientY;
+        const dx = endX - startX;
+        const dy = endY - startY;
 
-    const dx = endX - startX;
-    const dy = endY - startY;
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 30) {
+                next = 1;
+                month += 1;
+                updateIndex();
+            } else if (dx > -30) {
+                next = -1;
+                month -= 1;
+                updateIndex();
+            }
+        } else {
+            //   if (dy > 30) {
+            //     alert("Swiped Down");
+            //   } else if (dy < -30) {
+            //     alert("Swiped Up");
+            //   }
+        }
+    });
 
-    if (Math.abs(dx) > Math.abs(dy)) {
-      if (dx < 30) {
-         next = 1;
-        month += 1;
-        updateIndex();
-      } else if (dx > -30) {
-        next = -1;
-        month -= 1;
-        updateIndex();
-      }
-    } else {
-    //   if (dy > 30) {
-    //     alert("Swiped Down");
-    //   } else if (dy < -30) {
-    //     alert("Swiped Up");
-    //   }
-    }
-  });
+    // Handle click
+    swipeArea.addEventListener("click", (e) => {
+        if (isSwipe) {
+            // Ignore click if a swipe occurred
+            e.preventDefault();
+            return;
+        }
+        // alert("Clicked!");
 
-  // Handle click
-  swipeArea.addEventListener("click", (e) => {
-    if (isSwipe) {
-      // Ignore click if a swipe occurred
-      e.preventDefault();
-      return;
-    }
-    // alert("Clicked!");
-
-    const input = e.target.style.backgroundImage;
-            const path = input.slice(5, -2);
-
-
-        document.getElementById('frontImg').setAttribute('src', path)
-        document.getElementById('image-viewer').style.display = 'block'
-
-  });
-
-// document.getElementById('bgimg').addEventListener('click', (e)=>{
-        
-//         const input = e.target.style.backgroundImage;
-//             const path = input.slice(5, -2);
-
-
-//         document.getElementById('frontImg').setAttribute('src', path)
-//         document.getElementById('image-viewer').style.display = 'block'
-
-        
-//     })
-    document.getElementById('bgimg2').addEventListener('click', (e)=>{
-        
         const input = e.target.style.backgroundImage;
-            const path = input.slice(5, -2);
+        const path = input.slice(5, -2);
 
 
         document.getElementById('frontImg').setAttribute('src', path)
         document.getElementById('image-viewer').style.display = 'block'
 
-        
+    });
+
+    // document.getElementById('bgimg').addEventListener('click', (e)=>{
+
+    //         const input = e.target.style.backgroundImage;
+    //             const path = input.slice(5, -2);
+
+
+    //         document.getElementById('frontImg').setAttribute('src', path)
+    //         document.getElementById('image-viewer').style.display = 'block'
+
+
+    //     })
+    document.getElementById('bgimg2').addEventListener('click', (e) => {
+
+        const input = e.target.style.backgroundImage;
+        const path = input.slice(5, -2);
+
+
+        document.getElementById('frontImg').setAttribute('src', path)
+        document.getElementById('image-viewer').style.display = 'block'
+
+
     })
-    document.getElementById('bgimg3').addEventListener('click', (e)=>{
-        
+    document.getElementById('bgimg3').addEventListener('click', (e) => {
+
         const input = e.target.style.backgroundImage;
-            const path = input.slice(5, -2);
+        const path = input.slice(5, -2);
 
 
         document.getElementById('frontImg').setAttribute('src', path)
         document.getElementById('image-viewer').style.display = 'block'
 
-        
+
     })
 
     function closeImageViewer() {
         document.getElementById('image-viewer').style.display = 'none';
     }
 
- function gotoAbout(val) {
-    closeMobileMenu();
+    function gotoAbout(val) {
+        closeMobileMenu();
         const element = document.querySelector('.about');
         if (!val) {
             // slideBar(false);
@@ -377,23 +377,24 @@ let startX, startY, endX, endY;
     const openMenue = document.querySelector('.openMenu');
     const closeMenu = document.querySelector('.closeMenu');
     const mobileNav = document.querySelector('.mobile-nav');
-   openMenue.addEventListener('click', openMobileMenu)
+    openMenue.addEventListener('click', openMobileMenu)
+
     function openMobileMenu() {
         openMenue.setAttribute('style', 'display: none');
         closeMenu.setAttribute('style', 'display: block');
         mobileNav.setAttribute('style', 'display: block');
     }
-   closeMenu.addEventListener('click', closeMobile)
+    closeMenu.addEventListener('click', closeMobile)
 
     function closeMobile() {
-         openMenue.setAttribute('style', 'display: block');
+        openMenue.setAttribute('style', 'display: block');
         closeMenu.setAttribute('style', 'display: none');
         mobileNav.setAttribute('style', 'display: none');
     }
 
     function closeMobileMenu() {
-        
-       mobileNav.setAttribute('style', 'display: none');
+
+        mobileNav.setAttribute('style', 'display: none');
         //  closeMenu.setAttribute('style', 'display: none');
         // openMenue.setAttribute('style', 'display: block');
     }
@@ -414,7 +415,7 @@ let startX, startY, endX, endY;
         month += 1;
         updateIndex();
     })
-    backBtn.addEventListener("click", function () {
+    backBtn.addEventListener("click", function() {
         next = -1;
         month -= 1;
         updateIndex();
@@ -423,8 +424,8 @@ let startX, startY, endX, endY;
     document.getElementById("toggleSwitch").addEventListener("change", function() {
         if (this.checked) {
             isTamil = false;
-            
-            
+
+
         } else {
             isTamil = true;
 
@@ -435,9 +436,10 @@ let startX, startY, endX, endY;
     });
 
     function updateIndex() {
-        
+
         setCalendarImage();
     }
+
     function setMonth() {
         const today = new Date();
         month = today.getMonth() + 1; // getMonth() returns 0-11
@@ -450,18 +452,18 @@ let startX, startY, endX, endY;
         let key;
         let summary;
 
-         if (month == 1) {
+        if (month == 1) {
             backBtn.style.display = 'none';
-        } else if(month == 12){
+        } else if (month == 12) {
             rightBtn.style.display = 'none'
-        }else {
+        } else {
             backBtn.style.display = 'block';
             rightBtn.style.display = 'block';
         }
 
 
-        if(isTamil){
-           summary = 'tamEvent'
+        if (isTamil) {
+            summary = 'tamEvent'
             switch (month) {
                 case 1:
                     key = 'tamJan'
@@ -511,11 +513,11 @@ let startX, startY, endX, endY;
                     key = 'tamDec'
                     monthName = "மார்கழி"
                     break;
-            
+
                 default:
                     break;
             }
-        }else {
+        } else {
             summary = 'engEvent'
             switch (month) {
                 case 1:
@@ -566,7 +568,7 @@ let startX, startY, endX, endY;
                     key = 'engDec'
                     monthName = 'December'
                     break;
-            
+
                 default:
                     break;
             }
@@ -575,11 +577,11 @@ let startX, startY, endX, endY;
         let selectImg = calendar[key].split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1];
         let selectEvent = calendar[summary].split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1];
         console.log(selectEvent);
-        
+
         if (next == -1) {
             posterImg.classList.add('moveRightOff');
             // posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
-             posterImg.style.backgroundImage = `url('${selectImg}')`;
+            posterImg.style.backgroundImage = `url('${selectImg}')`;
             // posterImg.classList.add('moveRightIn');
             setTimeout(() => {
                 posterImg.classList.remove('moveRightOff');
@@ -588,10 +590,10 @@ let startX, startY, endX, endY;
             setTimeout(() => {
                 posterImg.classList.remove('moveRightIn');
             }, 600);
-        } else if(next == 1) {
-    
-           posterImg.style.backgroundImage = `url('${selectImg}')`;
-          
+        } else if (next == 1) {
+
+            posterImg.style.backgroundImage = `url('${selectImg}')`;
+
             posterImg.classList.add('moveleftOff');
             setTimeout(() => {
                 posterImg.classList.remove('moveleftOff');
@@ -604,13 +606,13 @@ let startX, startY, endX, endY;
             posterImg.style.backgroundImage = `url('${selectImg}')`;
         }
 
-       
+
         eventPoster.style.backgroundImage = `url('${selectEvent}')`;
         curMonth.innerHTML = monthName + ' - ' + year;
     }
 
-    
-     //Notice Handling
+
+    //Notice Handling
     let notice = [];
     let noticeIndex = 0;
     const right = document.getElementById('rightNot');
@@ -623,70 +625,71 @@ let startX, startY, endX, endY;
     function openNoticeModel() {
         closeMobileMenu();
         document.getElementById('notice-model').style.display = 'block';
-         noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
-         noticeIndex = 1
+        noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
+        noticeIndex = 1
         // updateNotice();
-        
-        
+
+
     }
+
     function closeNoticeModel() {
         document.getElementById('notice-model').style.display = 'none';
         noticeIndex = 0;
     }
 
     function updateNotice() {
-        
-        if(noticeIndex == 1) {
-            
+
+        if (noticeIndex == 1) {
+
             // console.log('ssddsdfooooooooooo');
-            
+
             noticeImg.classList.add('moveRightOff');
             // noticeImg.setAttribute('src', notice[currentIndex]);
             noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
             console.log(notice[noticeIndex]);
-            
+
             // // posterImg.classList.add('moveRightIn');
             // left.setAttribute('style', 'display: block');
             // right.setAttribute('style', 'display: none');
             right.style.display = 'none';
             left.style.display = 'block';
-           
+
             setTimeout(() => {
                 noticeImg.classList.remove('moveRightOff');
                 noticeImg.classList.add('moveRightIn');
             }, 500);
-             setTimeout(() => {
+            setTimeout(() => {
                 noticeImg.classList.remove('moveRightIn');
             }, 1000);
 
             noticeIndex = 0;
-        
+
         } else {
-         
-           noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
-           console.log(notice[noticeIndex]);
-           
+
+            noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
+            console.log(notice[noticeIndex]);
+
             // right.setAttribute('style', 'display: block');
             right.style.display = 'block';
             left.style.display = 'none';
             // left.setAttribute('style', 'display: none');
             noticeImg.classList.add('moveleftOff');
-              setTimeout(() => {
+            setTimeout(() => {
                 noticeImg.classList.remove('moveleftOff');
                 noticeImg.classList.add('moveLeftIn');
             }, 500);
 
-             setTimeout(() => {
+            setTimeout(() => {
                 noticeImg.classList.remove('moveLeftIn');
             }, 1000);
-               noticeIndex = 1;
+            noticeIndex = 1;
 
         }
     }
 
-     function loadNotice() {
+    function loadNotice() {
         notice = [];
-         const xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open('GET', '/Controllers/GetNotice.php', true);
         xhr.onload = function() {
             if (xhr.status == 200 && xhr.readyState == 4) {
@@ -696,16 +699,16 @@ let startX, startY, endX, endY;
                 let tamilN = response.data[0].tamil;
                 console.log(tamilN)
                 notice.push(
-                    tamilN.split('<?php echo $_SERVER['DOCUMENT_ROOT']?>')[1]
+                    tamilN.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1]
                 )
                 let englishN = response.data[0].eng;
                 notice.push(
-                    englishN.split('<?php echo $_SERVER['DOCUMENT_ROOT']?>')[1]
+                    englishN.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1]
                 )
 
                 console.log(notice);
-                
-                
+
+
 
             }
         }
@@ -722,7 +725,7 @@ let startX, startY, endX, endY;
                 var response = JSON.parse(xhr.responseText);
                 // console.log(response.data);
                 calendar = response.data[0];
-// console.log(calendar);
+                // console.log(calendar);
 
                 setMonth()
             }

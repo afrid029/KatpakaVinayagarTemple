@@ -165,35 +165,32 @@ if(isset($_POST['submit'])){
 
 
     $result = true;
-
     
-    $file = $_FILES[$name]["name"];
+    $fileTmp = $_FILES[$name]["tmp_name"];
     $imageFileType = strtolower(pathinfo($_FILES[$name]["name"], PATHINFO_EXTENSION));
-    $targetFile = $targetDirectory . $image . "." . $imageFileType;
-    if (move_uploaded_file($_FILES[$name]["tmp_name"], $targetFile)) {
-            // echo "The file has been uploaded successfully as: " . basename($targetFile);
+    $targetFile = $targetDirectory . $image . ".jpg";
+    switch ($imageFileType) {
+        case 'jpeg':
+        case 'jpg':
+            $transformedImage = imagecreatefromjpeg($fileTmp);
+            break;
+        case 'png':
+            $transformedImage = imagecreatefrompng($fileTmp);
+            break;
+        case 'gif':
+            $transformedImage  = imagecreatefromgif($fileTmp);
+            break;
+        default:
+            die("Unsupported file type.");
+    }
 
-            $query = "UPDATE calendar set $column = '$targetFile' where ID = 2025";
-            $res = mysqli_query($db, $query);
+    // Save compressed image (quality 70 out of 100)
+    imagejpeg($transformedImage, $targetFile, 70);
 
-            $result = $res;
-        } else {
-            // deleteDirectory($targetDirectory);
-            // $_SESSION['message'] = "Failed to upload Image. Try again later!";
-            // $_SESSION['status'] = false;
-            // $_SESSION['fromAction'] = true;
-            mysqli_close($db);
-            echo json_encode([
-            'status' => false,
-            'message' => 'Failed to upload Image. Try again later!'
-            ]);
-            exit();
-            return;
-        }
+    imagedestroy($transformedImage);
 
-    // print_r($length);
-    // exit();
-    
+        $query = "UPDATE calendar set $column = '$targetFile' where ID = 2025";
+            $result = mysqli_query($db, $query);
 
     if($result){
         // mysqli_commit($db);

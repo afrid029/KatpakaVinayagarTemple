@@ -15,6 +15,11 @@ nav {
   position: relative;
 }
 
+/* .test {
+  background-image: url("/Public/Notice/1756645315tam.jpg");
+  background-size: contain;
+} */
+
 .nav-bg {
   /* background-attachment: fixed; */
   background-image: url("/Assets/Images/bgframe.jpg");

@@ -61,31 +61,58 @@ if(isset($_POST['submit'])){
 
         $timestamp = time(); // Current timestamp (seconds since Unix epoch)
         $randomNumber = rand(1000, 9999); // Random number to add some variability
-        $targetFile = $targetDirectory . $ID . "_" . $timestamp . "_" . $randomNumber . "." . $imageFileType;
+        $targetFile = $targetDirectory . $ID . "_" . $timestamp . "_" . $randomNumber . ".jpg";
 
-        
-        if (move_uploaded_file($_FILES["image"]["tmp_name"][$i], $targetFile)) {
-            // echo "The file has been uploaded successfully as: " . basename($targetFile);
+        $fileTmp = $_FILES["image"]["tmp_name"][$i];
 
-            $query = "INSERT INTO gallery (ID, event, image) VALUES ('$ID', '$album','$targetFile')";
+        switch ($imageFileType) {
+        case 'jpeg':
+        case 'jpg':
+            $image = imagecreatefromjpeg($fileTmp);
+            break;
+        case 'png':
+            $image = imagecreatefrompng($fileTmp);
+            break;
+        case 'gif':
+            $image = imagecreatefromgif($fileTmp);
+            break;
+        default:
+            die("Unsupported file type.");
+    }
+
+    // Save compressed image (quality 70 out of 100)
+    imagejpeg($image, $targetFile, 70);
+
+    imagedestroy($image);
+
+    $query = "INSERT INTO gallery (ID, event, image) VALUES ('$ID', '$album','$targetFile')";
             $res = mysqli_query($db, $query);
 
             $result = $result && $res;
-        } else {
-            deleteDirectory($targetDirectory);
-            // $_SESSION['message'] = "Failed to upload Images. Try again later!";
-            // $_SESSION['status'] = false;
-            // $_SESSION['fromAction'] = true;
-            mysqli_rollback($db);
-            mysqli_close($db);
-            echo json_encode([
-            'status' => false,
-            'message' => 'Failed to upload Images. Try again later!'
-        ]);
-            exit();
-            break;
-            return;
-        }
+
+        
+        // if (move_uploaded_file($_FILES["image"]["tmp_name"][$i], $targetFile)) {
+        //     // echo "The file has been uploaded successfully as: " . basename($targetFile);
+
+        //     $query = "INSERT INTO gallery (ID, event, image) VALUES ('$ID', '$album','$targetFile')";
+        //     $res = mysqli_query($db, $query);
+
+        //     $result = $result && $res;
+        // } else {
+        //     deleteDirectory($targetDirectory);
+        //     // $_SESSION['message'] = "Failed to upload Images. Try again later!";
+        //     // $_SESSION['status'] = false;
+        //     // $_SESSION['fromAction'] = true;
+        //     mysqli_rollback($db);
+        //     mysqli_close($db);
+        //     echo json_encode([
+        //     'status' => false,
+        //     'message' => 'Failed to upload Images. Try again later!'
+        // ]);
+        //     exit();
+        //     break;
+        //     return;
+        // }
     }
 
     
