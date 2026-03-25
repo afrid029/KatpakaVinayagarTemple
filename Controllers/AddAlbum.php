@@ -78,7 +78,7 @@ if(isset($_POST['submit'])){
             break;
         default:
             die("Unsupported file type.");
-    }
+        }
 
     // Save compressed image (quality 70 out of 100)
     imagejpeg($image, $targetFile, 70);
