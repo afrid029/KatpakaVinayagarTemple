@@ -65,7 +65,7 @@
         function liveLoad() {
              if (video.canPlayType('application/vnd.apple.mpegurl')) {
             console.log('Native HLS supported');
-            video.src = 'https://tv3.massstream.net:3373/stream/play.m3u8'; // Replace with your stream URL
+            video.src = 'https://tv4.massstream.net:8081/katpakavinayagar/index.m3u8'; // Replace with your stream URL
             video.addEventListener('loadedmetadata', function() {
                 video.play().catch(function(error) {
                     alert('error in playing video', error)

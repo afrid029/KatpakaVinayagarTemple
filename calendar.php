@@ -1,160 +1,237 @@
 <?php SESSION_START() ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="Assets/Images/R1.PNG" />
-    <title>Calendar | கற்பக விநாயகர் தேவஸ்தானம்</title>
     <meta charset="UTF-8">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Mukta+Malar:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calendar | கற்பக விநாயகர் தேவஸ்தானம்</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Mukta+Malar:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {},
-                screens: {
-                    xs: "480px", // extra small devices
-                    sm: "640px", // small devices
-                    md: "768px", // medium devices
-                    lg: "1024px", // large devices
-                    xl: "1280px", // extra large
-                    "2xl": "1536px" // double extra large
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="/Assets/CSS/main.css">
+    <link rel="stylesheet" href="/Assets/CSS/index-page.css">
     <style>
-        .font-english {
-            font-family: 'Roboto', sans-serif;
+        .cal-page {
+            background: var(--bg);
+            min-height: 80vh;
         }
 
-        .font-tamil {
-            font-family: 'Anek Tamil', sans-serif;
+        .cal-wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 32px 5%;
+        }
+
+        .cal-month-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cal-month-bar h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: var(--font-tamil);
+        }
+
+        .cal-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cal-toggle small {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-sub);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: var(--primary);
+            border-radius: 24px;
+            transition: 0.3s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        input:checked+.slider {
+            background: var(--accent);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        .cal-image-wrap {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cal-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+        }
+
+        .cal-nav-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cal-nav-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .cal-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .bgimg {
+            width: 100%;
+            padding-bottom: 80%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .bgimg2 {
+            padding-bottom: 30%;
+        }
+
+        .bgimgx {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .cal-event-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            padding: 8px 16px 0;
         }
     </style>
-    <link rel="stylesheet" href="/Assets/CSS/calendar.css">
-    <link rel="stylesheet" href="/Assets/CSS/nav.css">
-    <link rel="stylesheet" href="/Assets/CSS/index.css">
-    <!-- <link rel="stylesheet" href="/Assets/CSS/alert.css">
-    <link rel="stylesheet" href="/Assets/CSS/pagination.css"> !-->
-    <link rel="stylesheet" href="/Assets/CSS/model.css">
-    <link rel="stylesheet" href="/Assets/CSS/model3.css">
-    <!-- <link rel="stylesheet" href="/Assets/CSS/login.css"> -->
-    <!-- <link rel="stylesheet" href="Assets/CSS/eventTile.css"> -->
-    <!-- <link rel="stylesheet" href="Assets/CSS/collection.css"> -->
-
 </head>
-<nav class="bg-red-900">
-    <div class="nav-bg"></div>
-    <div class="mx-auto">
-        <div class="relative flex h-40 items-center justify-between flxdir">
-            <div class="nav-container">
-                <div class="nav-image">
-                    <img src="/Assets/Images/R1.PNG" class="nav-image-img" alt="" srcset="">
-                </div>
-                <div class="nav-content">
-                    <h3>அருள்மிகு கற்பக விநாயகர் தேவஸ்தானம் - பிரம்றன்</h3>
-                    <h3>Arulmigu Katpaga Vinayagar Hindu Temple - Brampton</h3>
-                </div>
-            </div>
-
-            <div class="mobile-nav-container">
-                <div class="mobile-nav-image">
-                    <img src="/Assets/Images/R1.PNG" class="mobile-nav-image-img" alt="" srcset="">
-                </div>
-                <div class="mobile-nav-content">
-                    <h3>அருள்மிகு கற்பக விநாயகர் தேவஸ்தானம் - பிரம்றன்</h3>
-                    <h3>Arulmigu Katpaga Vinayagar Hindu Temple - Brampton</h3>
-                </div>
-            </div>
-
-            <ul class="nav-list">
-                <li><a href="/">Home</a></li>
-                <li class="active">Calendar</li>
-                <li><a href="/notice">Notice</a></li>
-                <li><a href="/gallery">Gallery</a></li>
-                <li onclick="gotoAbout()">About</li>
-
-            </ul>
-
-            <div class="openMenu">
-                <span class="material-symbols-outlined open-animate">
-                    menu
-                </span>
-            </div>
-            <div class="closeMenu">
-                <span class="material-symbols-outlined close-animate">
-                    close
-                </span>
-            </div>
-        </div>
-    </div>
-</nav>
 
 <body>
 
-    <!-- Mobile Navigations -->
-    <div class="mobile-nav">
-        <div class="mobile-nav-list">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                    fill="#F19E39">
-                    <path
-                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
+    <!-- NAV -->
+    <nav class="site-nav">
+        <div class="nav-bg"></div>
+        <div class="nav-brand">
+            <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" onclick="toggleDrawer()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                 </svg>
-                <a href="/">Home</a>
+            </button>
+            <div class="nav-brand-center">
+                <img src="/Assets/Images/R1.PNG" class="nav-logo" alt="Temple Logo">
+                <div class="nav-title">
+                    <span class="nav-title-tamil">அருள்மிகு கற்பக விநாயகர் தேவஸ்தானம் - பிரம்றன்</span>
+                    <span class="nav-title-english">Arulmigu Katpaga Vinayagar Hindu Temple - Brampton</span>
+                </div>
             </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                    fill="#F19E39">
-                    <path
-                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                </svg>
-                Calendar
-            </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                    fill="#F19E39">
-                    <path
-                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                </svg>
-                <a href="/notice">Notice</a>
-            </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                    fill="#F19E39">
-                    <path
-                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                </svg>
-                <a href="/gallery">Gallery</a>
-            </div>
-            <div onclick="gotoAbout()">
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                    fill="#F19E39">
-                    <path
-                        d="M337.69-662 394-814.46V-902h52v96h68v-96h52v87.54L622.31-662H337.69ZM106-106v-412h52v96h89.31l6.15-20h453.08l6.15 20H802v-96h52v412H586v-192H374v192H106Zm168.69-388 41.77-116h327.08l41.77 116H274.69Z" />
-                </svg>
-                About
-            </div>
-
+            <?php if (isset($_COOKIE['user'])): ?>
+                <a href="/dashboard" class="nav-action">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="currentColor">
+                        <path d="M192-192v-96l72-72v168h-72Zm126 0v-222l66-66 6 6v282h-72Zm126 0v-228l72 72v156h-72Zm126 0v-186l72-72v258h-72Zm126 0v-312l72-72v384h-72ZM192-378v-102l192-192 144 144 240-240v102L528-426 384-570 192-378Z" />
+                    </svg>
+                    Dashboard</a>
+                <a href="/logout" class="nav-action">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="currentColor">
+                        <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
+                    </svg>
+                    Logout</a>
+            <?php else: ?>
+                <button onclick="openLogin()" class="nav-action">
+                     <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="currentColor">
+                        <path d="M480-120q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840v106q-106.26 0-180.13 73.87Q226-586.26 226-480q0 106.26 73.87 180.13Q373.74-226 480-226v106Zm160-141.35L565.35-337l90-90H347v-106h308.35l-90-91L640-698.65 858.65-480 640-261.35Z" />
+                    </svg>
+                    Login</button>
+            <?php endif; ?>
         </div>
+        <div class="nav-links-bar">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/calendar" class="nav-link active">Calendar</a>
+            <a href="/notice" class="nav-link">Notice</a>
+            <a href="/gallery" class="nav-link">Gallery</a>
+            <a class="nav-link" onclick="gotoAbout()">About</a>
+        </div>
+    </nav>
 
+    <!-- NAV DRAWER -->
+    <div class="nav-drawer" id="navDrawer">
+        <button class="nav-drawer-close" onclick="closeDrawer()" aria-label="Close">&#x2715;</button>
+        <a href="/" class="nav-drawer-link">Home</a>
+        <a href="/calendar" class="nav-drawer-link">Calendar</a>
+        <a href="/notice" class="nav-drawer-link">Notice</a>
+        <a href="/gallery" class="nav-drawer-link">Gallery</a>
+        <a class="nav-drawer-link" onclick="gotoAbout();closeDrawer();">About</a>
+        <?php if (isset($_COOKIE['user'])): ?>
+            <a href="/dashboard" class="nav-drawer-link">Dashboard</a>
+            <a href="/logout" class="nav-drawer-link">Logout</a>
+        <?php else: ?>
+            <button onclick="openLogin();closeDrawer();" class="nav-drawer-link">Login</button>
+        <?php endif; ?>
     </div>
 
-    <div class="main">
-        <div class="left">
-            <div class="side-bg"></div>
-
-        </div>
-        <div class="content">
-            <div class="month">
-                <h4 id="month">May - 2025</h4>
-                <div class="toggle">
+    <div class="cal-page">
+        <div class="cal-wrapper">
+            <!-- Month bar -->
+            <div class="cal-month-bar">
+                <h4 id="month">Loading...</h4>
+                <div class="cal-toggle">
                     <small>த</small>
                     <label class="switch">
                         <input type="checkbox" id="toggleSwitch">
@@ -162,76 +239,34 @@
                     </label>
                     <small>E</small>
                 </div>
-
-
             </div>
-            <hr>
-            <div class="calendar">
-                <div class="btn backbtn">
-                    <span class="material-symbols-outlined">
-                        arrow_circle_left
-                    </span>
+
+            <!-- Calendar image -->
+            <div class="cal-image-wrap">
+                <div class="cal-nav">
+                    <button class="cal-nav-btn backbtn" id="calBackBtn">
+                        <span class="material-symbols-outlined" style="font-size:20px;">arrow_circle_left</span>
+                    </button>
+                    <button class="cal-nav-btn rightBtn" id="calNextBtn">
+                        <span class="material-symbols-outlined" style="font-size:20px;">arrow_circle_right</span>
+                    </button>
                 </div>
-
-                <div class="btn rightBtn ">
-                    <span class="material-symbols-outlined">
-                        arrow_circle_right
-                    </span>
-                </div>
-
-                <div id="bgimg" class="bgimg">
-                </div>
-
-                <hr>
-            </div>
-            <div class="event-sum">
-                <div id="bgimg2" class="bgimg bgimg2">
-                </div>
-            </div>
-
-        </div>
-        <div class="right">
-            <div class="side-bg"></div>
-
-        </div>
-    </div>
-
-    <!-- AboutUs -->
-     <?php include('Components/aboutus.php') ?>
-
-    <!-- Notice Model -->
-    <div id="notice-model" class="model-overlay2">
-        <div class="model-content2">
-            <div onclick="closeNoticeModel()" class="close-btn2">Close</div>
-            <div id="leftNot" class="btn backbtn">
-                <span class="material-symbols-outlined">
-                    arrow_circle_left
-                </span>
-            </div>
-
-            <div id="rightNot" class="btn rightBtn ">
-                <span class="material-symbols-outlined">
-                    arrow_circle_right
-                </span>
-            </div>
-            <div id="bgimg3" class="bgimgx">
-
+                <div id="bgimg" class="bgimg"></div>
+                <hr style="border-color:var(--border);margin:0 16px;">
+                <p class="cal-event-title">Event Summary</p>
+                <div id="bgimg2" class="bgimg bgimg2"></div>
             </div>
         </div>
     </div>
 
-    <div id="image-viewer" class="model-overlay">
-        <div class="model-body">
-            <div onclick="closeImageViewer()" class="close-btn">x</div>
-            <div class="model-content">
-                <div class="image-viewer-container">
-                    <div class="image-viewer">
-                        <img id="frontImg" src="" alt="Front Page">
-                    </div>
-                </div>
+    <!-- About -->
+    <?php include('Components/aboutus.php') ?>
 
-            </div>
-
+    <!-- Image Viewer -->
+    <div id="image-viewer" class="modal-overlay" style="display:none;background:rgba(0,0,0,0.85);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+            <button onclick="closeImageViewer()" style="position:fixed;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:#000;color:#fff;border:none;font-size:1rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;">&#x2715;</button>
+            <img id="frontImg" src="" alt="Calendar" style="max-width:95vw;max-height:92vh;object-fit:contain;border-radius:8px;">
         </div>
     </div>
 
@@ -239,42 +274,58 @@
 
 </html>
 
+<!-- Login Modal -->
+<?php include('Components/loginModel.php') ?>
+
 <script>
+    /* ─── Drawer ─── */
+    function toggleDrawer() {
+        document.getElementById('navDrawer').classList.toggle('is-open');
+    }
+
+    function closeDrawer() {
+        document.getElementById('navDrawer').classList.remove('is-open');
+    }
+
+    function openLogin() {
+        document.getElementById('login-model').style.display = 'flex';
+    }
+
+    function closeLoginViewer() {
+        document.getElementById('login-model').style.display = 'none';
+    }
+
+    /* ─── About scroll ─── */
+    function gotoAbout(val) {
+        const element = document.querySelector('.about-section');
+        if (!element) return;
+        const rect = element.getBoundingClientRect();
+        window.scrollTo({
+            top: window.scrollY + rect.top - (val ? 200 : 0),
+            behavior: 'smooth'
+        });
+    }
+
+    /* ─── Touch swipe ─── */
     let startX, startY, endX, endY;
     let isSwipe = false;
+    const swipeArea = document.getElementById('bgimg');
 
-    const swipeArea = document.getElementById("bgimg");
-
-    // Handle touch start
-    swipeArea.addEventListener("touchstart", (e) => {
+    swipeArea.addEventListener('touchstart', e => {
         isSwipe = false;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
     });
-
-    // Handle touch move
-    swipeArea.addEventListener("touchmove", (e) => {
-        const moveX = e.touches[0].clientX;
-        const moveY = e.touches[0].clientY;
-        const dx = moveX - startX;
-        const dy = moveY - startY;
-
-        // If movement is more than a few pixels, treat as swipe
-        if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
-            isSwipe = true;
-        }
+    swipeArea.addEventListener('touchmove', e => {
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (Math.abs(dx) > 10 || Math.abs(dy) > 10) isSwipe = true;
     });
-
-    // Handle touch end
-    swipeArea.addEventListener("touchend", (e) => {
-        if (!isSwipe) return; // Don't trigger swipe if it's a tap
-
+    swipeArea.addEventListener('touchend', e => {
+        if (!isSwipe) return;
         endX = e.changedTouches[0].clientX;
-        endY = e.changedTouches[0].clientY;
-
         const dx = endX - startX;
-        const dy = endY - startY;
-
+        const dy = (e.changedTouches[0].clientY) - startY;
         if (Math.abs(dx) > Math.abs(dy)) {
             if (dx < 30) {
                 next = 1;
@@ -285,304 +336,103 @@
                 month -= 1;
                 updateIndex();
             }
-        } else {
-            //   if (dy > 30) {
-            //     alert("Swiped Down");
-            //   } else if (dy < -30) {
-            //     alert("Swiped Up");
-            //   }
         }
     });
 
-    // Handle click
-    swipeArea.addEventListener("click", (e) => {
+    /* ─── Image viewers ─── */
+    swipeArea.addEventListener('click', e => {
         if (isSwipe) {
-            // Ignore click if a swipe occurred
             e.preventDefault();
             return;
         }
-        // alert("Clicked!");
-
-        const input = e.target.style.backgroundImage;
-        const path = input.slice(5, -2);
-
-
-        document.getElementById('frontImg').setAttribute('src', path)
-        document.getElementById('image-viewer').style.display = 'block'
-
+        const path = e.target.style.backgroundImage.slice(5, -2);
+        document.getElementById('frontImg').setAttribute('src', path);
+        document.getElementById('image-viewer').style.display = 'block';
     });
-
-    // document.getElementById('bgimg').addEventListener('click', (e)=>{
-
-    //         const input = e.target.style.backgroundImage;
-    //             const path = input.slice(5, -2);
-
-
-    //         document.getElementById('frontImg').setAttribute('src', path)
-    //         document.getElementById('image-viewer').style.display = 'block'
-
-
-    //     })
-    document.getElementById('bgimg2').addEventListener('click', (e) => {
-
-        const input = e.target.style.backgroundImage;
-        const path = input.slice(5, -2);
-
-
-        document.getElementById('frontImg').setAttribute('src', path)
-        document.getElementById('image-viewer').style.display = 'block'
-
-
-    })
-    document.getElementById('bgimg3').addEventListener('click', (e) => {
-
-        const input = e.target.style.backgroundImage;
-        const path = input.slice(5, -2);
-
-
-        document.getElementById('frontImg').setAttribute('src', path)
-        document.getElementById('image-viewer').style.display = 'block'
-
-
-    })
+    document.getElementById('bgimg2').addEventListener('click', e => {
+        const path = e.target.style.backgroundImage.slice(5, -2);
+        document.getElementById('frontImg').setAttribute('src', path);
+        document.getElementById('image-viewer').style.display = 'block';
+    });
 
     function closeImageViewer() {
         document.getElementById('image-viewer').style.display = 'none';
     }
 
-    function gotoAbout(val) {
-        closeMobileMenu();
-        const element = document.querySelector('.about');
-        if (!val) {
-            // slideBar(false);
-            const rect = element.getBoundingClientRect();
-
-            // Scroll the page down by the position of the element plus an additional 100px
-            window.scrollTo({
-                top: window.scrollY + rect.top, // Current scroll position + element's top position + 100px
-                behavior: 'smooth' // Smooth scrolling
-            });
-        } else {
-            const rect = element.getBoundingClientRect();
-
-            // Scroll the page down by the position of the element plus an additional 100px
-            window.scrollTo({
-                top: window.scrollY + rect.top - 200, // Current scroll position + element's top position + 100px
-                behavior: 'smooth' // Smooth scrolling
-            });
-        }
-
-    }
-
-    const openMenue = document.querySelector('.openMenu');
-    const closeMenu = document.querySelector('.closeMenu');
-    const mobileNav = document.querySelector('.mobile-nav');
-    openMenue.addEventListener('click', openMobileMenu)
-
-    function openMobileMenu() {
-        openMenue.setAttribute('style', 'display: none');
-        closeMenu.setAttribute('style', 'display: block');
-        mobileNav.setAttribute('style', 'display: block');
-    }
-    closeMenu.addEventListener('click', closeMobile)
-
-    function closeMobile() {
-        openMenue.setAttribute('style', 'display: block');
-        closeMenu.setAttribute('style', 'display: none');
-        mobileNav.setAttribute('style', 'display: none');
-    }
-
-    function closeMobileMenu() {
-
-        mobileNav.setAttribute('style', 'display: none');
-        //  closeMenu.setAttribute('style', 'display: none');
-        // openMenue.setAttribute('style', 'display: block');
-    }
+    /* ─── Calendar logic ─── */
     let isTamil = true;
     let calendar;
     let month;
     let monthName;
     let year;
     let next = 0;
-    const backBtn = document.querySelector('.backbtn');
-    const rightBtn = document.querySelector('.rightBtn');
+    const backBtn = document.getElementById('calBackBtn');
+    const rightBtn = document.getElementById('calNextBtn');
     const posterImg = document.getElementById('bgimg');
-    const eventPoster = document.getElementById('bgimg2')
+    const eventPoster = document.getElementById('bgimg2');
     const curMonth = document.getElementById('month');
 
-    rightBtn.addEventListener("click", function() {
+    rightBtn.addEventListener('click', function() {
         next = 1;
         month += 1;
         updateIndex();
-    })
-    backBtn.addEventListener("click", function() {
+    });
+    backBtn.addEventListener('click', function() {
         next = -1;
         month -= 1;
         updateIndex();
-    })
+    });
 
-    document.getElementById("toggleSwitch").addEventListener("change", function() {
-        if (this.checked) {
-            isTamil = false;
-
-
-        } else {
-            isTamil = true;
-
-        }
+    document.getElementById('toggleSwitch').addEventListener('change', function() {
+        isTamil = !this.checked;
         next = 0;
         setCalendarImage();
-        // updateIndex();
     });
 
     function updateIndex() {
-
         setCalendarImage();
     }
 
     function setMonth() {
         const today = new Date();
-        month = today.getMonth() + 1; // getMonth() returns 0-11
-        year = today.getFullYear(); // 
-
+        month = today.getMonth() + 1;
+        year = today.getFullYear();
         setCalendarImage();
     }
 
     function setCalendarImage() {
-        let key;
-        let summary;
-
+        let key, summary;
         if (month == 1) {
-            backBtn.style.display = 'none';
-        } else if (month == 12) {
-            rightBtn.style.display = 'none'
+            backBtn.disabled = true;
         } else {
-            backBtn.style.display = 'block';
-            rightBtn.style.display = 'block';
+            backBtn.disabled = false;
         }
-
+        if (month == 12) {
+            rightBtn.disabled = true;
+        } else {
+            rightBtn.disabled = false;
+        }
 
         if (isTamil) {
-            summary = 'tamEvent'
-            switch (month) {
-                case 1:
-                    key = 'tamJan'
-                    monthName = "தை"
-                    break;
-                case 2:
-                    key = 'tamFeb'
-                    monthName = "மாசி"
-                    break;
-                case 3:
-                    key = 'tamMar'
-                    monthName = "பங்குனி"
-                    break;
-                case 4:
-                    key = 'tamApr'
-                    monthName = "சித்திரை"
-                    break;
-                case 5:
-                    key = 'tamMay'
-                    monthName = "வைகாசி"
-                    break;
-                case 6:
-                    key = 'tamJun'
-                    monthName = "ஆனி"
-                    break;
-                case 7:
-                    key = 'tamJul'
-                    monthName = "ஆடி"
-                    break;
-                case 8:
-                    key = 'tamAug'
-                    monthName = "ஆவணி"
-                    break;
-                case 9:
-                    key = 'tamSep'
-                    monthName = "புரட்டாதி"
-                    break;
-                case 10:
-                    key = 'tamOct'
-                    monthName = "ஐப்பசி"
-                    break;
-                case 11:
-                    key = 'tamNov'
-                    monthName = "கார்த்திகை"
-                    break;
-                case 12:
-                    key = 'tamDec'
-                    monthName = "மார்கழி"
-                    break;
-
-                default:
-                    break;
-            }
+            summary = 'tamEvent';
+            const tamilMonths = ['', 'tamJan', 'tamFeb', 'tamMar', 'tamApr', 'tamMay', 'tamJun', 'tamJul', 'tamAug', 'tamSep', 'tamOct', 'tamNov', 'tamDec'];
+            const tamilNames = ['', 'தை', 'மாசி', 'பங்குனி', 'சித்திரை', 'வைகாசி', 'ஆனி', 'ஆடி', 'ஆவணி', 'புரட்டாதி', 'ஐப்பசி', 'கார்த்திகை', 'மார்கழி'];
+            key = tamilMonths[month];
+            monthName = tamilNames[month];
         } else {
-            summary = 'engEvent'
-            switch (month) {
-                case 1:
-                    key = 'engJan';
-                    monthName = "January"
-                    break;
-                case 2:
-                    key = 'engFeb'
-                    monthName = "February"
-                    break;
-                case 3:
-                    key = 'engMar'
-                    monthName = "March"
-                    break;
-                case 4:
-                    key = 'engApr'
-                    monthName = "April"
-                    break;
-                case 5:
-                    key = 'engMay'
-                    monthName = "May"
-                    break;
-                case 6:
-                    key = 'engJun'
-                    monthName = "June"
-                    break;
-                case 7:
-                    key = 'engJul'
-                    monthName = "July"
-                    break;
-                case 8:
-                    key = 'engAug'
-                    monthName = "August"
-                    break;
-                case 9:
-                    key = 'engSep'
-                    monthName = 'September'
-                    break;
-                case 10:
-                    key = 'engOct'
-                    monthName = 'October'
-                    break;
-                case 11:
-                    key = 'engNov'
-                    monthName = 'November'
-                    break;
-                case 12:
-                    key = 'engDec'
-                    monthName = 'December'
-                    break;
-
-                default:
-                    break;
-            }
+            summary = 'engEvent';
+            const engMonths = ['', 'engJan', 'engFeb', 'engMar', 'engApr', 'engMay', 'engJun', 'engJul', 'engAug', 'engSep', 'engOct', 'engNov', 'engDec'];
+            const engNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            key = engMonths[month];
+            monthName = engNames[month];
         }
 
-        let selectImg = calendar[key].split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1];
-        let selectEvent = calendar[summary].split('<?php echo $_SERVER['DOCUMENT_ROOT']  ?>')[1];
-        console.log(selectEvent);
+        let selectImg = calendar[key].split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1];
+        let selectEvent = calendar[summary].split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1];
 
         if (next == -1) {
             posterImg.classList.add('moveRightOff');
-            // posterImg.style.backgroundImage = `url('${albumImages[currentIndex]}')`;
             posterImg.style.backgroundImage = `url('${selectImg}')`;
-            // posterImg.classList.add('moveRightIn');
             setTimeout(() => {
                 posterImg.classList.remove('moveRightOff');
                 posterImg.classList.add('moveRightIn');
@@ -591,9 +441,7 @@
                 posterImg.classList.remove('moveRightIn');
             }, 600);
         } else if (next == 1) {
-
             posterImg.style.backgroundImage = `url('${selectImg}')`;
-
             posterImg.classList.add('moveleftOff');
             setTimeout(() => {
                 posterImg.classList.remove('moveleftOff');
@@ -606,134 +454,25 @@
             posterImg.style.backgroundImage = `url('${selectImg}')`;
         }
 
-
         eventPoster.style.backgroundImage = `url('${selectEvent}')`;
         curMonth.innerHTML = monthName + ' - ' + year;
     }
 
 
-    //Notice Handling
-    let notice = [];
-    let noticeIndex = 0;
-    const right = document.getElementById('rightNot');
-    const left = document.getElementById('leftNot');
-    const noticeImg = document.getElementById('bgimg3');
-
-    left.addEventListener('click', updateNotice);
-    right.addEventListener('click', updateNotice);
-
-    function openNoticeModel() {
-        closeMobileMenu();
-        document.getElementById('notice-model').style.display = 'block';
-        noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
-        noticeIndex = 1
-        // updateNotice();
-
-
-    }
-
-    function closeNoticeModel() {
-        document.getElementById('notice-model').style.display = 'none';
-        noticeIndex = 0;
-    }
-
-    function updateNotice() {
-
-        if (noticeIndex == 1) {
-
-            // console.log('ssddsdfooooooooooo');
-
-            noticeImg.classList.add('moveRightOff');
-            // noticeImg.setAttribute('src', notice[currentIndex]);
-            noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
-            console.log(notice[noticeIndex]);
-
-            // // posterImg.classList.add('moveRightIn');
-            // left.setAttribute('style', 'display: block');
-            // right.setAttribute('style', 'display: none');
-            right.style.display = 'none';
-            left.style.display = 'block';
-
-            setTimeout(() => {
-                noticeImg.classList.remove('moveRightOff');
-                noticeImg.classList.add('moveRightIn');
-            }, 500);
-            setTimeout(() => {
-                noticeImg.classList.remove('moveRightIn');
-            }, 1000);
-
-            noticeIndex = 0;
-
-        } else {
-
-            noticeImg.style.backgroundImage = `url('${notice[noticeIndex]}')`;
-            console.log(notice[noticeIndex]);
-
-            // right.setAttribute('style', 'display: block');
-            right.style.display = 'block';
-            left.style.display = 'none';
-            // left.setAttribute('style', 'display: none');
-            noticeImg.classList.add('moveleftOff');
-            setTimeout(() => {
-                noticeImg.classList.remove('moveleftOff');
-                noticeImg.classList.add('moveLeftIn');
-            }, 500);
-
-            setTimeout(() => {
-                noticeImg.classList.remove('moveLeftIn');
-            }, 1000);
-            noticeIndex = 1;
-
-        }
-    }
-
-    function loadNotice() {
-        notice = [];
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/Controllers/GetNotice.php', true);
-        xhr.onload = function() {
-            if (xhr.status == 200 && xhr.readyState == 4) {
-                var response = JSON.parse(xhr.responseText);
-                // console.log(response.data);
-
-                let tamilN = response.data[0].tamil;
-                console.log(tamilN)
-                notice.push(
-                    tamilN.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1]
-                )
-                let englishN = response.data[0].eng;
-                notice.push(
-                    englishN.split('<?php echo $_SERVER['DOCUMENT_ROOT'] ?>')[1]
-                )
-
-                console.log(notice);
-
-
-
-            }
-        }
-        xhr.send();
-    }
-
-
-    //OnLoad 
     function loadCalendar() {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', '/Controllers/GetCalendar.php', true);
         xhr.onload = function() {
             if (xhr.status == 200 && xhr.readyState == 4) {
                 var response = JSON.parse(xhr.responseText);
-                // console.log(response.data);
                 calendar = response.data[0];
-                // console.log(calendar);
-
-                setMonth()
+                setMonth();
             }
-        }
+        };
         xhr.send();
     }
+
     window.onload = function() {
         loadCalendar();
-        loadNotice();
-    }
+    };
 </script>

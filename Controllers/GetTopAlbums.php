@@ -2,7 +2,7 @@
 
 include('DbConnectivity.php');
 
-$query="SELECT ID, MAX(event) as event , GROUP_CONCAT(image SEPARATOR ' ,') as images, MAX(uploadedDate) AS uploadedDate FROM gallery
+$query = "SELECT ID, MAX(event) as event , GROUP_CONCAT(image SEPARATOR ' ,') as images, MAX(uploadedDate) AS uploadedDate FROM gallery
 group by ID
 Order by uploadedDate desc
 LIMIT 4";
@@ -20,15 +20,16 @@ if (mysqli_num_rows($result) > 0) {
 
         $event = $row['event'];
         $images = $row['images'];
-        $img1 = explode(" ,", $images)[0];
-        $img1 = explode($_SERVER['DOCUMENT_ROOT'] , $img1)[1];
-        $img2 = explode(" ,", $images)[1];
-         $img2 = explode($_SERVER['DOCUMENT_ROOT'] , $img2)[1];
+        if (empty($images)) continue;
+        $img1 = trim(explode(" ,", $images)[0]);
+        $docRoot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']), '/');
+        $img1 = str_replace($docRoot, '', str_replace('\\', '/', $img1));
+        if (empty(trim($img1))) continue;
+        $images = str_replace($docRoot, '', str_replace('\\', '/', $images));
 
         ob_start();
         include(__DIR__ . '/../Components/collection.php');
-        $content = ob_get_clean(); 
-
+        $content = ob_get_clean();
 
         $html .= $content;
     }
@@ -47,6 +48,3 @@ mysqli_close($db);
 echo json_encode([
     'html' => $html
 ]);
-
-?>
-

@@ -2,7 +2,7 @@
 <?php
 include('DbConnectivity.php');
 
-$results_per_page = 10;
+$results_per_page = 12;
 
 // Get the current page from the URL, default to 1 if not set
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -19,7 +19,7 @@ $total_records = $row['total'];
 
 $total_received = '';
 
-$query="SELECT ID, MAX(event) as event , GROUP_CONCAT(image SEPARATOR ' ,') as images, MAX(uploadedDate) AS uploadedDate FROM gallery
+$query = "SELECT ID, MAX(event) as event , GROUP_CONCAT(image SEPARATOR ' ,') as images, MAX(uploadedDate) AS uploadedDate FROM gallery
 group by ID
 Order by uploadedDate desc
 LIMIT $offset, $results_per_page";
@@ -30,17 +30,18 @@ $result = mysqli_query($db, $query);
 $html = '';
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-         $event = $row['event'];
+        $event = $row['event'];
         $images = $row['images'];
-        $img1 = explode(" ,", $images)[0];
-        $img1 = explode($_SERVER['DOCUMENT_ROOT'] , $img1)[1];
-        $img2 = explode(" ,", $images)[1];
-         $img2 = explode($_SERVER['DOCUMENT_ROOT'] , $img2)[1];
+        if (empty($images)) continue;
+        $img1 = trim(explode(" ,", $images)[0]);
+        $docRoot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']), '/');
+        $img1 = str_replace($docRoot, '', str_replace('\\', '/', $img1));
+        if (empty(trim($img1))) continue;
+        $images = str_replace($docRoot, '', str_replace('\\', '/', $images));
 
         ob_start();
         include(__DIR__ . '/../Components/collection.php');
-        $content = ob_get_clean(); 
-
+        $content = ob_get_clean();
 
         $html .= $content;
     }

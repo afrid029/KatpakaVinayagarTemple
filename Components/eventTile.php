@@ -1,17 +1,17 @@
+<?php
+$_d = date_create($date);
+$dayNum = date_format($_d, 'j');
+$monStr = date_format($_d, 'M');
+$timeFmt = date('g:i A', strtotime($time));
+?>
 <div class="event">
-        <div class="event-title">
-            <h4><?php echo $name ?></h4>
-        </div>
-        <div class="event-info">
-            <div class="event-time">
-                <h4><?php echo $date ?></h4>
-            </div>
-            <div class="event-date">
-                <h4><?php echo $time ?></h4>
-            </div>
-        </div>
-        <div class="event-desc">
-            <?php echo $desc ?>
-        </div>
+    <div class="event-date-col">
+        <span class="event-day"><?php echo $dayNum ?></span>
+        <span class="event-mon"><?php echo $monStr ?></span>
+    </div>
+    <div class="event-body">
+        <h4 class="event-name"><?php echo htmlspecialchars($name) ?></h4>
+        <span class="event-chip"><?php echo $timeFmt ?></span>
+        <div class="event-desc"><?php echo htmlspecialchars($desc) ?></div>
+    </div>
 </div>
-
